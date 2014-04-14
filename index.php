@@ -17,14 +17,39 @@
 	</head>
 
 	<body>
-		<div class="container">
-			<div class="row" id="layer1">
-				<p>Test</p>
+		<div class="navbar navbar-inverse navbar-static-top">
+ 			<div class="container">
+				<a href="#" class="navbar-brand">Selenium Apartments</a> 
+				<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse"></button>
+
+				<div class="collapse navbar-collapse navHeaderCollapse">
+					<ul class="nav navbar-nav navbar-right">
+				    	<li class="active"><a href="#">Home</a></li>
+				    	<li><a href="#">Stuff1</a></li>
+				        <li class="dropdown">
+				            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Stuff2</a>
+				            <ul class="dropdown-menu">
+				            	<li><a href="#">Stuff2a</a></li>
+				            	<li><a href="#">Stuff2b</a></li>
+				            	<li><a href="#">Stuff2c</a></li>
+				            	<li><a href="#">Stuff2d</a></li>
+				            </ul>
+				        </li>
+				        <li><a href="#">About</a></li>
+				        <li><a href="#">Contact</a></li>
+				    </ul>
+				</div>
 			</div>
-			<hr>
-			<div class="row" id="layer2">
-				<p>Test2</p>
-			</div>
+		</div>
+  
+  		<div class="navbar navbar-default navbar-fixed-bottom">
+    		<div class="container">
+      			<p class="navbar-text pull-left">CST433 - Brandon Sleater, Joseph Stratton & Dominic - April 2014</p>
+      
+      			<a href="#" class="navbar-btn btn-danger btn pull-right">
+      				<span class="glyphicon glyphicon-star"></span>  Rent Now!
+      			</a>
+    		</div>
 		</div>
 	</body>
 </html>
