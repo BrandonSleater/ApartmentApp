@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="CST433 Final Project: Queries with the Selenium Apartment Database">
-        <meta name="author" content="Brandon Sleater, Joseph Stratton, Dominic">
+        <meta name="author" content="Brandon Sleater, Joseph Stratton, Dominic Smith">
         <title>Selenium Apartments</title>
 
 		<!-- JQuery -->
@@ -31,19 +31,9 @@
 
 				<div class="collapse navbar-collapse navHeaderCollapse">
 					<ul class="nav navbar-nav navbar-right">
-				    	<li class="active"><a href="#">Home</a></li>
-				    	<li><a href="#">Stuff1</a></li>
-				        <li class="dropdown">
-				            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Stuff2</a>
-				            <ul class="dropdown-menu">
-				            	<li><a href="#">Stuff2a</a></li>
-				            	<li><a href="#">Stuff2b</a></li>
-				            	<li><a href="#">Stuff2c</a></li>
-				            	<li><a href="#">Stuff2d</a></li>
-				            </ul>
-				        </li>
-				        <li><a href="#">About</a></li>
-				        <li><a href="#">Contact</a></li>
+				    	<li class="active"><a href="index.php">Home</a></li>
+				        <li><a href="about.php">About</a></li>
+				        <li><a href="contact.php">Contact</a></li>
 				    </ul>
 				</div>
 			</div>
@@ -55,17 +45,17 @@
 				<form role="form" class="go-right">
 		    		<h1>Search Form:</h1>
 					<div class="form-group">
-						<input id="name" name="name" type="text" class="form-control" required>
+						<input id="name" name="name" type="text" class="form-control" placeholder="Bob Dylan" required>
 						<label for="name">Your Name</label>
 					</div>
 
 					<div class="form-group">
-						<input id="phone" name="phone" type="tel" class="form-control" required>
+						<input id="phone" name="phone" type="tel" class="form-control" placeholder="480276842" required>
 						<label for="phone">Primary Phone</label>
 					</div>
 
 					<div class="form-group">
-						<textarea id="message" name="phone" class="form-control" required></textarea>
+						<textarea id="message" name="phone" class="form-control" placeholder="Some message crap..." required></textarea>
 						<label for="message">Message</label>
 					</div>
 					<button class="btn btn-lg btn-default">Submit</button>
@@ -73,7 +63,7 @@
 		    </div>
 		</div>
 
-		<!-- SEARCH RESULTS -->
+		<!-- Search Results -->
 		<div class="container-fluid" style="padding-bottom: 20px">
 	        <div class="container container-pad" id="property-listings">
 	            
@@ -309,7 +299,9 @@
 
   		<div class="navbar navbar-default navbar-fixed-bottom">
     		<div class="container">
-      			<p class="navbar-text pull-left">CST433 - Brandon Sleater, Joseph Stratton & Dominic - April 2014</p>
+    			<img class="redman" src="reddit-man.png" alt="Our little boy">
+    			
+      			<p class="navbar-text pull-left">CST433 - Brandon Sleater, Joseph Stratton & Dominic Smith - April 2014</p>
       
       			<a href="#" class="navbar-btn btn-danger btn pull-right">
       				<span class="glyphicon glyphicon-star"></span>  Rent Now!

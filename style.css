@@ -17,6 +17,10 @@ a {
 
 
 /* Search Form */
+.form-label {
+    background: transparent;
+}
+
 form {
     width: 320px;
     margin: 20px;
@@ -63,7 +67,6 @@ form label {
     color: #999;
     padding: 7px 6px;
     font-weight: normal;
-    z-index: 9999;
 }
 
 form textarea {
@@ -219,4 +222,12 @@ form.go-right input:focus + label, form.go-right textarea:focus + label {
     bottom: 60px;
     right: 20px;
     display:none;
+}
+
+.redman {
+    left: 10px;
+    bottom: 10px;
+    height: 30px;
+    width: 30px;
+    position: absolute;
 }
