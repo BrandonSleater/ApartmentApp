@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<!-- Headers -->
@@ -17,9 +18,12 @@
 
 		<!-- Selenium Styling -->
 		<link href="style.css" rel="stylesheet">
+		<script src="script.js" defer></script>
 	</head>
 
 	<body>
+
+		<!-- Navigation -->
 		<div class="navbar navbar-inverse navbar-static-top" style="margin-bottom: 0px">
  			<div class="container">
 				<a href="#" class="navbar-brand">Selenium Apartments</a> 
@@ -45,7 +49,32 @@
 			</div>
 		</div>
 
-		<div class="container-fluid" style="background-color:#e8e8e8; padding-bottom: 20px">
+		<!-- Search Form -->
+		<div class="container">
+		    <div class="row">
+				<form role="form" class="go-right">
+		    		<h1>Search Form:</h1>
+					<div class="form-group">
+						<input id="name" name="name" type="text" class="form-control" required>
+						<label for="name">Your Name</label>
+					</div>
+
+					<div class="form-group">
+						<input id="phone" name="phone" type="tel" class="form-control" required>
+						<label for="phone">Primary Phone</label>
+					</div>
+
+					<div class="form-group">
+						<textarea id="message" name="phone" class="form-control" required></textarea>
+						<label for="message">Message</label>
+					</div>
+					<button class="btn btn-lg btn-default">Submit</button>
+				</form>
+		    </div>
+		</div>
+
+		<!-- SEARCH RESULTS -->
+		<div class="container-fluid" style="padding-bottom: 20px">
 	        <div class="container container-pad" id="property-listings">
 	            
 	            <div class="row">
@@ -275,6 +304,8 @@
 	            </div><!-- End row -->
 	        </div><!-- End container -->
 	    </div>
+
+		<a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
 
   		<div class="navbar navbar-default navbar-fixed-bottom">
     		<div class="container">
