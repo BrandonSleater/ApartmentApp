@@ -1,6 +1,6 @@
 <?php
 
-include 'php/sqldb.php';
+include 'sqldb.php';
 
 class model extends sqldb {
   
@@ -8,6 +8,8 @@ class model extends sqldb {
   function __construct($args = FALSE) {
     
     parent::__construct($args);
+    
+    var_dump($_POST);
   }
   
   
@@ -18,7 +20,7 @@ class model extends sqldb {
   public function test_query() {
     
     //Test parameter for SQL
-    $bid = 1;
+    $bid = $_POST['name'];
     
     //SQL query
     $query = "

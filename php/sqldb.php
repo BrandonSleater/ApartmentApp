@@ -44,16 +44,16 @@ class sqldb {
    * This function is used for preparing our SQL statements
    * then returning an associative array of results
    * 
-   * @param type $link      DB Connection
+   * @param type $dbconn    DB Connection
    * @param type $sql       Actual SQL Query code
    * @param type $typeDef   Data type of passed parameter
    * @param type $params    Values we pass into the sql statement
    * 
    * @return boolean/array  Can either be passed False for a bad query or array for single/multiple queries
    */
-  public function prepSQL($link, $sql, $typeDef = FALSE, $params = FALSE){ 
+  public function prepSQL($dbconn, $sql, $typeDef = FALSE, $params = FALSE){ 
     
-    if ($stmt = mysqli_prepare($link, $sql)) { 
+    if ($stmt = mysqli_prepare($dbconn, $sql)) { 
       
       if (count($params) == count($params, 1)) { 
         $params     = [$params]; 
@@ -111,7 +111,7 @@ class sqldb {
               
               $row = []; 
               
-              foreach($stmtRow as $key => $value){ 
+              foreach($stmtRow as $key => $value) { 
                 $row[$key] = $value;           
               } 
               

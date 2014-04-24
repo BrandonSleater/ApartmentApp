@@ -5,11 +5,11 @@
 	<head>
 		<!-- Headers -->
 		<meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="CST433 Final Project: Queries with the Selenium Apartment Database">
-        <meta name="author" content="Brandon Sleater, Joseph Stratton, Dominic Smith">
-        <title>Selenium Apartments</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CST433 Final Project: Queries with the Selenium Apartment Database">
+    <meta name="author" content="Brandon Sleater, Joseph Stratton, Dominic Smith">
+    <title>Selenium Apartments</title>
 
 		<!-- JQuery -->
 		<script src="https://code.jquery.com/jquery-2.1.0.min.js" defer></script>
@@ -34,24 +34,27 @@
 				<div class="collapse navbar-collapse navHeaderCollapse">
 					<ul class="nav navbar-nav navbar-right">
 				    	<li class="active"><a href="index.php">Home</a></li>
-				        <li><a href="about.php">About</a></li>
-				        <li><a href="contact.php">Contact</a></li>
-				    </ul>
+				      <li><a href="about.php">About</a></li>
+				      <li><a href="contact.php">Contact</a></li>
+				  </ul>
 				</div>
 			</div>
 		</div>
 
     <?php 
       //For testing purposes
-      $obj = new model();
-      $obj->test_query();
+      //$obj = new model();
+      //$obj->test_query();
+      //if (isset($_POST['name'])) {
+        //$obj = new model();
+      //}
     ?>
     
 		<!-- Search Form -->
 		<div class="container">
-		    <div class="row">
-				<form role="form" class="go-right">
-		    		<h1>Search Form:</h1>
+		  <div class="row">
+				<form role="form" class="go-right" name="apt-search" id="apt-search" action="php/test.php" method="POST">
+          <h1>Search Form:</h1>
 					<div class="form-group">
 						<input id="name" name="name" type="text" class="form-control" placeholder="Bob Dylan" required>
 						<label for="name">Your Name</label>
@@ -63,12 +66,12 @@
 					</div>
 
 					<div class="form-group">
-						<textarea id="message" name="phone" class="form-control" placeholder="Some message crap..." required></textarea>
+						<textarea id="message" name="message" class="form-control" placeholder="Some message crap..." required></textarea>
 						<label for="message">Message</label>
 					</div>
 					<button class="btn btn-lg btn-default">Submit</button>
 				</form>
-		    </div>
+		  </div>
 		</div>
 
 		<!-- Search Results -->
