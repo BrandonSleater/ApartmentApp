@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `apartment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `apartment` (
-  `apart_pk` int(11) NOT NULL,
+  `apart_pk` int(11) NOT NULL AUTO_INCREMENT,
   `story` varchar(45) DEFAULT NULL,
   `floorplan` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
@@ -50,12 +50,12 @@ DROP TABLE IF EXISTS `building`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `building` (
-  `build_pk` int(11) NOT NULL,
+  `build_pk` int(11) NOT NULL AUTO_INCREMENT,
   `build_name` varchar(45) DEFAULT NULL,
   `build_address` varchar(45) DEFAULT NULL,
   `build_landlord` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`build_pk`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,6 +64,7 @@ CREATE TABLE `building` (
 
 LOCK TABLES `building` WRITE;
 /*!40000 ALTER TABLE `building` DISABLE KEYS */;
+INSERT INTO `building` VALUES (1,'Building1','1172. Building St.','John Doe');
 /*!40000 ALTER TABLE `building` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +76,7 @@ DROP TABLE IF EXISTS `landlord`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `landlord` (
-  `ll_pk` int(11) NOT NULL,
+  `ll_pk` int(11) NOT NULL AUTO_INCREMENT,
   `ll_name` varchar(45) DEFAULT NULL,
   `ll_salary` varchar(45) DEFAULT NULL,
   `ll_gender` varchar(45) DEFAULT NULL,
@@ -101,7 +102,7 @@ DROP TABLE IF EXISTS `maintenance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `maintenance` (
-  `main_pk` int(11) NOT NULL,
+  `main_pk` int(11) NOT NULL AUTO_INCREMENT,
   `main_cost` varchar(45) DEFAULT NULL,
   `main_type` varchar(45) DEFAULT NULL,
   `main_start_date` datetime DEFAULT NULL,
@@ -127,7 +128,7 @@ DROP TABLE IF EXISTS `payment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `payment` (
-  `pay_pk` int(11) NOT NULL,
+  `pay_pk` int(11) NOT NULL AUTO_INCREMENT,
   `pay_type` varchar(45) DEFAULT NULL,
   `pay_date` datetime DEFAULT NULL,
   `pay_processed` varchar(45) DEFAULT NULL,
@@ -152,7 +153,7 @@ DROP TABLE IF EXISTS `tenant`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tenant` (
-  `tena_pk` int(11) NOT NULL,
+  `tena_pk` int(11) NOT NULL AUTO_INCREMENT,
   `tena_name` varchar(45) DEFAULT NULL,
   `tena_age` varchar(45) DEFAULT NULL,
   `tena_sex` varchar(45) DEFAULT NULL,
@@ -179,4 +180,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-04-23 11:20:47
+-- Dump completed on 2014-04-24 14:13:30
