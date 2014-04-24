@@ -1,3 +1,5 @@
+<?php include 'php/model.php'; ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,7 +24,7 @@
 	</head>
 
 	<body>
-
+    
 		<!-- Navigation -->
 		<div class="navbar navbar-inverse navbar-static-top" style="margin-bottom: 0px">
  			<div class="container">
@@ -39,6 +41,12 @@
 			</div>
 		</div>
 
+    <?php 
+      //For testing purposes
+      $obj = new model();
+      $obj->test_query();
+    ?>
+    
 		<!-- Search Form -->
 		<div class="container">
 		    <div class="row">
