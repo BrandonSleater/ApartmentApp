@@ -40,7 +40,7 @@ $("#apt-search").submit(function(e) {
         type: "POST",
         data : postData,
         success: function(data) {
-            $('#container').html(data);
+            $('#top-search').html(data);
         },
         error: function(jqXHR, textStatus, errorThrown) {}
     });

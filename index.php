@@ -45,15 +45,16 @@
       //For testing purposes
       //$obj = new model();
       //$obj->test_query();
-      //if (isset($_POST['name'])) {
-        //$obj = new model();
-      //}
+      if (isset($_POST['name'])) {
+        $obj = new model();
+        //echo "content";
+      }
     ?>
     
 		<!-- Search Form -->
-		<div class="container">
+		<div class="container" id="top-search">
 		  <div class="row">
-				<form role="form" class="go-right" name="apt-search" id="apt-search" action="php/test.php" method="POST">
+				<form role="form" class="go-right" name="apt-search" id="apt-search" action="" method="POST">
           <h1>Search Form:</h1>
 					<div class="form-group">
 						<input id="name" name="name" type="text" class="form-control" placeholder="Bob Dylan" required>

@@ -9,7 +9,7 @@ class model extends sqldb {
     
     parent::__construct($args);
     
-    var_dump($_POST);
+    $this->test_query();
   }
   
   
@@ -21,6 +21,7 @@ class model extends sqldb {
     
     //Test parameter for SQL
     $bid = $_POST['name'];
+    //echo "name is " . $_POST['name'];
     
     //SQL query
     $query = "
