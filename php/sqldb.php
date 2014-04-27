@@ -2,23 +2,24 @@
 
 class sqldb {
 
-  public $conn;
+  public $conn;   // DB connection
   
   
   function __construct($args = FALSE) {
     
-    //If mysqli config is passed, use it. Else use default
+    // If mysqli config is passed, use it. Else use default
     $args = ($args !== FALSE) ? $args : $this->getConfig(); 
     
     $this->conn = @new mysqli($args['HOST'], $args['USER'], $args['PW'], $args['DB'], $args['PORT']);
 		
-    //If we can't connect, alert the user, else return a successful connection
+    // If we can't connect, alert the user, else return a successful connection
     if ($this->conn->connect_errno) {
       
-      //Build error message
+      // Build error message
       throw new Exception($this->conn->connect_errno);
 		} else {
       
+      // Successful connection
       return $this->conn;
     }
   }
@@ -40,30 +41,32 @@ class sqldb {
   }
 
 
+  /**
+   * Simple function to query and return results in
+   * an associative array. Little brother of function below
+  */
   public function runSQL($sql) {
 
+    // SQL result holder
     $data = array();
 
+    // Run the sql
     $query = $this->conn->query($sql);
-    //$result = $query->fetch_array(MYSQLI_ASSOC);
 
-            //And we display the results
-    while($result = $query->fetch_array(MYSQLI_ASSOC))
-    {
-    /*echo "id :" .$result['fname'];
-    echo "<br> ";
-    echo "name :".$result['lname'];
-    echo "<br>";
-    echo "name :".$result['middlename'];
-    echo "<br>";
-    echo "<br>";*/
+    // Collect rows returned into an associative array
+    while($result = $query->fetch_array(MYSQLI_ASSOC)) {
+
+      // Give each row an index
       array_push($data, $result);
     }
+
+    // Free result
     $query->free();
 
-    /* close connection */
+    // Close up the DB
     $this->conn->close();
 
+    // Send it back to caller
     return $data;
   }
   

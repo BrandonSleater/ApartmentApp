@@ -7,6 +7,7 @@ class model extends sqldb {
 
   function __construct($args = FALSE) {
     
+    // Currently, no reason to pass another config to our sql class
     parent::__construct();
     
     // On instantiation, run our search query
@@ -38,11 +39,10 @@ class model extends sqldb {
    */
   public function search_query($post) {
     
-    //Test parameter for SQL
-    $bid = $post['name'];
-    //echo "name is " . $_POST['name'];
+    // Lets clean up the data before we give it to our database
+    //$data = $this->cleanPOSTData($post);
     
-    //SQL query
+    // SQL query
     $query = "
       SELECT
         b.build_name,
@@ -65,32 +65,32 @@ class model extends sqldb {
         a.price
     ";
     
-    //Parameters must be stored in an array
-
-    //Run the query. The values are received in the form of an associative array
-    //$result = $this->prepSQL($this->conn, $query, "i", $params);
+    // Run the query. The values are received in the form of an associative array
     $result = $this->runSQL($query);
     
-    //Lets make sure we are getting the data back
-    /*echo "Name = " . $result[0]['build_name'];
-    echo "<BR>Address = " . $result[0]['build_address'];
-    echo "<BR>Landlord = " . $result[0]['build_landlord'];*/
+    // Clean up our inputs
+    //$html = $this->cleanSQLData($result);
+
+    // Give our data to our html generator
+    //$this->buildHTML($html);
     $this->buildHTML($result);
   }
 
 
   public function buildHTML($data) {
-    
+
+    // Search results container
     $html = '<div class="col-sm-12" style="padding-bottom: 100px">';
 
-    $switch = 1; // Between left and right boxes
+    // Counter for box switching
+    $switch = 1;
 
     foreach($data as $value => $key) {
 
       // Which sides the box is on
       $side = ($switch) ? 'left' : 'right';
 
-      // Apartment Container
+      // Apartment container
       $html .= '<div class="col-sm-5 pull-'.$side.'" style="border: 2px solid #000">';
 
       // Each row of data
@@ -120,14 +120,17 @@ class model extends sqldb {
           Has a washer and dryer?: '.$key["has_washdry"].'
         </div>';
 
+      // End apartment container
       $html .= '</div>';
 
       // Handles flipping between sides
       $switch = ($switch) ? 0 : 1;
     }
 
+    // End search results container
     $html .= '</div>';
 
+    // Send our html to the client
     echo $html;
   }
 }
