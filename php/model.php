@@ -95,28 +95,31 @@ class model extends sqldb {
 
       // Each row of data
       $html .= '
-        <div class="row" id="apt-floorplan"> 
+        <div class="pull-left" id="apt-image">
+          <img src="images/reddit-man.png" alt="apartment image" class="img-rounded" width="140px" height="140px">
+        </div>
+        <div class="row pull-right" id="apt-floorplan"> 
           Apartment Floorplan: '.$key["floorplan"].'
-        </div>
-        <div class="row" id="apt-direction"> 
+        </div><BR>
+        <div class="row pull-right" id="apt-direction"> 
           Apartment faces '.$key["build_name"].'
-        </div>
-        <div class="row" id="apt-price"> 
+        </div><BR>
+        <div class="row pull-right" id="apt-price"> 
           Monthly Rent: '.$key["price"].'
-        </div>
-        <div class="row" id="apt-internet"> 
+        </div><BR>
+        <div class="row pull-right" id="apt-internet"> 
           Has internet?: '.$key["has_internet"].'
-        </div>
-        <div class="row" id="apt-microwave"> 
+        </div><BR>
+        <div class="row pull-right" id="apt-microwave"> 
           Has a microwave?: '.$key["has_microwave"].'
-        </div>
-        <div class="row" id="apt-patio"> 
+        </div><BR>
+        <div class="row pull-right" id="apt-patio"> 
           Has a patio?: '.$key["has_patio"].'
-        </div>
-        <div class="row" id="apt-dishwasher"> 
+        </div><BR>
+        <div class="row pull-right" id="apt-dishwasher"> 
           Has a dishwasher?: '.$key["has_dishwasher"].'
-        </div>
-        <div class="row" id="apt-washdry"> 
+        </div><BR>
+        <div class="row pull-right" id="apt-washdry"> 
           Has a washer and dryer?: '.$key["has_washdry"].'
         </div>';
 
