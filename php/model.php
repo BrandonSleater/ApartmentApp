@@ -87,37 +87,43 @@ class model extends sqldb {
 
     foreach($data as $value => $key) {
 
-      if ($switch) {
+      // Which sides the box is on
+      $side = ($switch) ? 'left' : 'right';
 
-        $html .= '<div class="col-sm-5 pull-left" style="border: 2px solid #000">';
+      // Apartment Container
+      $html .= '<div class="col-sm-5 pull-'.$side.'" style="border: 2px solid #000">';
 
-        foreach ($key as $title => $data) {
+      // Each row of data
+      $html .= '
+        <div class="row" id="apt-floorplan"> 
+          Apartment Floorplan: '.$key["floorplan"].'
+        </div>
+        <div class="row" id="apt-direction"> 
+          Apartment faces '.$key["build_name"].'
+        </div>
+        <div class="row" id="apt-price"> 
+          Monthly Rent: '.$key["price"].'
+        </div>
+        <div class="row" id="apt-internet"> 
+          Has internet?: '.$key["has_internet"].'
+        </div>
+        <div class="row" id="apt-microwave"> 
+          Has a microwave?: '.$key["has_microwave"].'
+        </div>
+        <div class="row" id="apt-patio"> 
+          Has a patio?: '.$key["has_patio"].'
+        </div>
+        <div class="row" id="apt-dishwasher"> 
+          Has a dishwasher?: '.$key["has_dishwasher"].'
+        </div>
+        <div class="row" id="apt-washdry"> 
+          Has a washer and dryer?: '.$key["has_washdry"].'
+        </div>';
 
-          $html .= '
-            <div class="row"> 
-              title is '.$title.', value is '.$data.';
-            </div>';
-        }
+      $html .= '</div>';
 
-        $html .= '</div>';
-
-        $switch--;
-      } else {
-        
-        $html .= '<div class="col-sm-5 pull-right" style="border: 2px solid #000">';
-
-        foreach ($key as $title => $data) {
-
-          $html .= '
-            <div class="row"> 
-              title is '.$title.', value is '.$data.';
-            </div>';
-        }
-
-        $html .= '</div>';
-
-        $switch++;
-      }
+      // Handles flipping between sides
+      $switch = ($switch) ? 0 : 1;
     }
 
     $html .= '</div>';
