@@ -38,6 +38,34 @@ class sqldb {
       'PORT' => 3306
     ];
   }
+
+
+  public function runSQL($sql) {
+
+    $data = array();
+
+    $query = $this->conn->query($sql);
+    //$result = $query->fetch_array(MYSQLI_ASSOC);
+
+            //And we display the results
+    while($result = $query->fetch_array(MYSQLI_ASSOC))
+    {
+    /*echo "id :" .$result['fname'];
+    echo "<br> ";
+    echo "name :".$result['lname'];
+    echo "<br>";
+    echo "name :".$result['middlename'];
+    echo "<br>";
+    echo "<br>";*/
+      array_push($data, $result);
+    }
+    $query->free();
+
+    /* close connection */
+    $this->conn->close();
+
+    return $data;
+  }
   
   
   /**
