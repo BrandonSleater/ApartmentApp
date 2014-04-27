@@ -58,7 +58,8 @@ class model extends sqldb {
       INNER JOIN
         building AS b ON b.build_pk = a.build_fk
       WHERE
-        a.status = 1
+        a.status = 1 AND
+        a.has_internet = 0
       ORDER BY
         b.build_name,
         a.price
@@ -80,19 +81,45 @@ class model extends sqldb {
 
   public function buildHTML($data) {
     
-    $html = '<div class="col-sm-6">';
+    $html = '<div class="col-sm-12">';
 
-    /*foreach ($data as $key => $value) {
-      foreach ($value as $result) {
-        $html .= ''.$result.'<br>';
-      }
-    }*/
-    //print_r($data);
+    $switch = 1; // Between left and right boxes
+
     foreach($data as $value => $key) {
-      foreach($key as $title => $data) {
-        echo "title is $title, value is $data<BR>";
+
+      if ($switch) {
+
+        $html .= '<div class="col-sm-5 pull-left" style="border: 2px solid #000">';
+
+        foreach ($key as $title => $data) {
+
+          $html .= '
+            <div class="row"> 
+              title is '.$title.', value is '.$data.';
+            </div>';
+        }
+
+        $html .= '</div>';
+
+        $switch--;
+      } else {
+        
+        $html .= '<div class="col-sm-5 pull-right" style="border: 2px solid #000">';
+
+        foreach ($key as $title => $data) {
+
+          $html .= '
+            <div class="row"> 
+              title is '.$title.', value is '.$data.';
+            </div>';
+        }
+
+        $html .= '</div>';
+
+        $switch++;
       }
-      echo "<BR>";
+
+      echo '<BR>';
     }
 
     $html .= '</div>';
