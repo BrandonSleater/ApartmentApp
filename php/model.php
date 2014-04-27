@@ -81,7 +81,7 @@ class model extends sqldb {
 
   public function buildHTML($data) {
     
-    $html = '<div class="col-sm-12">';
+    $html = '<div class="col-sm-12" style="padding-bottom: 100px">';
 
     $switch = 1; // Between left and right boxes
 
@@ -118,8 +118,6 @@ class model extends sqldb {
 
         $switch++;
       }
-
-      echo '<BR>';
     }
 
     $html .= '</div>';

@@ -64,9 +64,18 @@
 				</form>
 		  </div>
 		</div>
+        
+        <div class="container">
+	        <div class="row">
+	        	<div class="col-md-12">
+	            	<h1>Search Results:</h1><hr style="border-color: #7F8C8D">
+	          	</div>
+	        </div>
 
+			<div class="row" id="search-results">
+		</div>
 		<!-- Search Results -->
-		<div class="container" style="padding-bottom: 20px">
+		<!--<div class="container" style="padding-bottom: 20px">
 	        <div class="container container-pad" id="property-listings">
 	            
 	            <div class="row">
@@ -75,8 +84,8 @@
 	              	</div>
 	            </div>
 	            
-	            <div class="row" id="search-results"></div>
-	                <!--<div class="col-sm-6"> 
+	            </div>
+	                <div class="col-sm-6"> 
 
 	                    <div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
 	                        <div class="media">
