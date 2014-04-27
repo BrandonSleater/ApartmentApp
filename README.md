@@ -12,7 +12,7 @@ To install:
 ```sh
 cd DB-Management-Final/sql
 mysql -u root -p
-source init.sql;
-source selenium_init_build.sql;
+source init_user.sql;
+source init_build.sql;
 exit
 ```
