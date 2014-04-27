@@ -1,6 +1,7 @@
 <?php
 
-echo "fail";
-exit;
+include 'model.php';
+
+	$model = new model($_POST);
 
 ?>

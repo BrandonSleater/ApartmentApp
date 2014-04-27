@@ -7,9 +7,9 @@ class model extends sqldb {
 
   function __construct($args = FALSE) {
     
-    parent::__construct($args);
+    parent::__construct();
     
-    $this->test_query();
+    $this->test_query($args);
   }
   
   
@@ -17,10 +17,10 @@ class model extends sqldb {
    * Basic test query to make sure we are communicating
    * with our DB and that the OOP Style SQL is working correctly
    */
-  public function test_query() {
+  public function test_query($post) {
     
     //Test parameter for SQL
-    $bid = $_POST['name'];
+    $bid = $post['name'];
     //echo "name is " . $_POST['name'];
     
     //SQL query

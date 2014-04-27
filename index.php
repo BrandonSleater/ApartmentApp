@@ -40,21 +40,11 @@
 				</div>
 			</div>
 		</div>
-
-    <?php 
-      //For testing purposes
-      //$obj = new model();
-      //$obj->test_query();
-      if (isset($_POST['name'])) {
-        $obj = new model();
-        //echo "content";
-      }
-    ?>
     
 		<!-- Search Form -->
 		<div class="container" id="top-search">
 		  <div class="row">
-				<form role="form" class="go-right" name="apt-search" id="apt-search" action="" method="POST">
+				<form role="form" class="go-right" name="apt-search" id="apt-search" action="php/test.php" method="POST">
           <h1>Search Form:</h1>
 					<div class="form-group">
 						<input id="name" name="name" type="text" class="form-control" placeholder="Bob Dylan" required>
@@ -76,7 +66,7 @@
 		</div>
 
 		<!-- Search Results -->
-		<div class="container-fluid" style="padding-bottom: 20px">
+		<div class="container" style="padding-bottom: 20px">
 	        <div class="container container-pad" id="property-listings">
 	            
 	            <div class="row">
@@ -85,10 +75,9 @@
 	              	</div>
 	            </div>
 	            
-	            <div class="row">
-	                <div class="col-sm-6"> 
+	            <div class="row" id="search-results"></div>
+	                <!--<div class="col-sm-6"> 
 
-	                    <!-- Begin Listing: 609 W GRAVERS LN-->
 	                    <div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
 	                        <div class="media">
 	                            <a class="pull-left" href="#" target="_parent">
@@ -122,9 +111,8 @@
 	                                Evergreen</span>
 	                            </div>
 	                        </div>
-	                    </div><!-- End Listing-->
+	                    </div>
 
-	                    <!-- Begin Listing: 218 LYNNEBROOK LN-->
 	                    <div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
 	                        <div class="media">
 	                            <a class="pull-left" href="#" target="_parent">
@@ -157,9 +145,8 @@
 	                                historical s...</p><span class="fnt-smaller fnt-lighter fnt-arial">Courtesy of HS Fox & Roach-Blue Bell</span>
 	                            </div>
 	                        </div>
-	                    </div><!-- End Listing-->
+	                    </div>
 
-	                    <!-- Begin Listing: 209 CHESTNUT HILL AVE-->
 	                    <div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
 	                        <div class="media">
 	                            <a class="pull-left" href="#" target="_parent">
@@ -192,12 +179,11 @@
 	                                mansion once cons...</p><span class="fnt-smaller fnt-lighter fnt-arial">Courtesy of ng and Foster-Devon</span>
 	                            </div>
 	                        </div>
-	                    </div><!-- End Listing-->
+	                    </div>
 	                </div>
 
 	                <div class="col-sm-6">  
 
-	                    <!-- Begin Listing: 1220-32 N HOWARD ST-->
 	                    <div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
 	                        <div class="media">
 	                            <a class="pull-left" href="#" target="_parent">
@@ -230,9 +216,8 @@
 	                                neighborhoods. ...</p><span class="fnt-smaller fnt-lighter fnt-arial">Courtesy of ll Banker Preferred-Philadelphia</span>
 	                            </div>
 	                        </div>
-	                    </div><!-- End Listing-->
+	                    </div>
 
-	                    <!-- Begin Listing: 9006 CREFELD ST-->
 	                    <div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
 	                        <div class="media">
 	                            <a class="pull-left" href="#" target="_parent">
@@ -265,9 +250,8 @@
 	                                neighborh...</p><span class="fnt-smaller fnt-lighter fnt-arial">Courtesy of RE/MAX Services</span>
 	                            </div>
 	                        </div>
-	                    </div><!-- End Listing-->
+	                    </div>
 
-	                    <!-- Begin Listing: 701 W ALLENS LN-->
 	                    <div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
 	                        <div class="media">
 	                            <a class="pull-left" href="#" target="_parent">
@@ -301,11 +285,11 @@
 	                                Evergreen</span>
 	                            </div>
 	                        </div>
-	                    </div><!-- End Listing-->
-	                </div><!-- End Col -->
-	            </div><!-- End row -->
-	        </div><!-- End container -->
-	    </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>-->
 
 		<a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
 
