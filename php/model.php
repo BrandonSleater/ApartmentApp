@@ -61,7 +61,6 @@ class model extends sqldb {
         a.status = 1 AND
         a.has_internet = 0
       ORDER BY
-        b.build_name,
         a.price
     ";
     
@@ -90,13 +89,33 @@ class model extends sqldb {
       // Which sides the box is on
       $side = ($switch) ? 'left' : 'right';
 
+      $html .= ($switch) ? '<div class="row" style="padding-bottom: 20px">' : '';
+
       // Apartment container
       $html .= '<div class="col-sm-5 pull-'.$side.'" style="border: 2px solid #000">';
+
+      // Determine which photo we are using
+      switch ($key['floorplan']) {
+        case 'Studio':
+          $img = 'studio';
+          break;
+
+        case '1 Bedroom':
+          $img = '1bed';
+          break;
+
+        case '2 Bedroom':
+          $img = '2bed';
+          break;
+
+        default:
+          break;
+      }
 
       // Each row of data
       $html .= '
         <div class="pull-left" id="apt-image">
-          <img src="images/reddit-man.png" alt="apartment image" class="img-rounded" width="140px" height="140px">
+          <img src="images/'.$img.'.png" alt="apartment image" class="img-rounded" width="140px" height="140px">
         </div>
         <div class="row pull-right" id="apt-floorplan"> 
           Floorplan: '.$key["floorplan"].'
@@ -125,6 +144,8 @@ class model extends sqldb {
 
       // End apartment container
       $html .= '</div>';
+
+      $html .= (! $switch) ? '</div>' : '';
 
       // Handles flipping between sides
       $switch = ($switch) ? 0 : 1;
