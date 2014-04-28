@@ -1,8 +1,7 @@
-DB-Management-Final
-===================
+DB-Management-Final - CST433
+============================
 
-Test database queries (CRUD) for a sample apartment complex.
-CST 433
+Test database search queries for a sample apartment complex based off amenities/price/layout/city.
 
 Setup
 =====
