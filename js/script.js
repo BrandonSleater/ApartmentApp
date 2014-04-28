@@ -42,7 +42,7 @@ $("#apt-search").submit(function(e) {
         success: function(data) {
             $('#search-results').html(data);
         },
-        error: function(jqXHR, textStatus, errorThrown) {}
+        error: function() {}
     });
     
     e.preventDefault();

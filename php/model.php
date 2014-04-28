@@ -69,11 +69,11 @@ class model extends sqldb {
     $result = $this->runSQL($query);
     
     // Clean up our inputs
-    //$html = $this->cleanSQLData($result);
+    $html = $this->cleanSQLData($result);
 
     // Give our data to our html generator
     //$this->buildHTML($html);
-    $this->buildHTML($result);
+    $this->buildHTML($html);
   }
 
 
@@ -99,28 +99,28 @@ class model extends sqldb {
           <img src="images/reddit-man.png" alt="apartment image" class="img-rounded" width="140px" height="140px">
         </div>
         <div class="row pull-right" id="apt-floorplan"> 
-          Apartment Floorplan: '.$key["floorplan"].'
+          Floorplan: '.$key["floorplan"].'
         </div><BR>
         <div class="row pull-right" id="apt-direction"> 
-          Apartment faces '.$key["build_name"].'
+          Direction Facing: '.$key["build_name"].'
         </div><BR>
         <div class="row pull-right" id="apt-price"> 
           Monthly Rent: '.$key["price"].'
         </div><BR>
         <div class="row pull-right" id="apt-internet"> 
-          Has internet?: '.$key["has_internet"].'
+          Has Internet?: '.$key["has_internet"].'
         </div><BR>
         <div class="row pull-right" id="apt-microwave"> 
-          Has a microwave?: '.$key["has_microwave"].'
+          Has a Microwave?: '.$key["has_microwave"].'
         </div><BR>
         <div class="row pull-right" id="apt-patio"> 
-          Has a patio?: '.$key["has_patio"].'
+          Has a Patio?: '.$key["has_patio"].'
         </div><BR>
         <div class="row pull-right" id="apt-dishwasher"> 
-          Has a dishwasher?: '.$key["has_dishwasher"].'
+          Has a Dishwasher?: '.$key["has_dishwasher"].'
         </div><BR>
         <div class="row pull-right" id="apt-washdry"> 
-          Has a washer and dryer?: '.$key["has_washdry"].'
+          Has a Washer and Dryer?: '.$key["has_washdry"].'
         </div>';
 
       // End apartment container
@@ -135,5 +135,60 @@ class model extends sqldb {
 
     // Send our html to the client
     echo $html;
+  }
+
+
+  /**
+   * This will sanitize our inputs before we use them in the sql
+   * (sql injection prevention)
+   */
+  private function cleanPOSTData($post) {
+
+  }
+
+
+  /**
+   * This will reformat the data from the sql to something visually
+   * more appealing to the client
+   */
+  private function cleanSQLData($sql) {
+
+    foreach ($sql as $value => $key) {
+
+      foreach ($key as $data => $result) {
+        
+        switch ($data) {
+
+          case 'floorplan':   
+            // Handle "studio"
+            $sql[$value][$data] = ucfirst($result);
+
+            // Handle "1Bed,2Bed"
+            if (is_numeric($result[0])) {
+              $sql[$value][$data] = preg_replace('/^.{1}/', "$0 ", $result."room");
+            }
+            break;
+
+          case 'price':
+            // Handle dollar sign
+            $sql[$value][$data] = preg_replace('/^/', "$$0", $result);
+            break;
+
+          case 'has_internet':
+          case 'has_washdry':
+          case 'has_dishwasher':
+          case 'has_patio':
+          case 'has_microwave':
+            // Handle 0 and 1
+            $sql[$value][$data] = ($result) ? 'Yes' : 'No';
+            break;
+
+          default:
+            break;
+        }
+      }
+    }
+
+    return $sql;
   }
 }
