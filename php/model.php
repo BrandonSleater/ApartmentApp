@@ -79,7 +79,7 @@ class model extends sqldb {
   public function buildHTML($data) {
 
     // Search results container
-    $html = '<div class="col-sm-12" style="padding-bottom: 100px">';
+    $html = '<div class="col-sm-12" style="padding-bottom: 50px">';
 
     // Counter for box switching
     $switch = 1;
@@ -89,10 +89,10 @@ class model extends sqldb {
       // Which sides the box is on
       $side = ($switch) ? 'left' : 'right';
 
-      $html .= ($switch) ? '<div class="row" style="padding-bottom: 20px">' : '';
+      $html .= ($switch) ? '<div class="row" style="padding-bottom: 40px">' : '';
 
       // Apartment container
-      $html .= '<div class="col-sm-5 pull-'.$side.'" style="border: 2px solid #000">';
+      $html .= '<div class="col-sm-5 cont-border pull-'.$side.'" style="margin-'.$side.': 70px">';
 
       // Determine which photo we are using
       switch ($key['floorplan']) {
@@ -114,32 +114,30 @@ class model extends sqldb {
 
       // Each row of data
       $html .= '
-        <div class="pull-left" id="apt-image">
-          <img src="images/'.$img.'.png" alt="apartment image" class="img-rounded" width="140px" height="140px">
+        <div class="row text-center" id="apt-image">
+          <img src="images/'.$img.'.png" alt="apartment image" class="img-rounded" width="95%" height="180px">
         </div>
-        <div class="row pull-right" id="apt-floorplan"> 
-          Floorplan: '.$key["floorplan"].'
+
+        <div class="row text-center" id="apt-floorplan"> 
+          <h3>'.$key["floorplan"].' - '.$key["price"].'/month</h3><hr style="width: 70%">
         </div><BR>
-        <div class="row pull-right" id="apt-direction"> 
-          Direction Facing: '.$key["build_name"].'
+
+        <div class="row text-center" id="apt-direction-internet"> 
+          <span style="font-size: 17px">Direction Facing: <span style="color: #000; font-weight: bold">'.$key["build_name"].'</span>
+          <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
+          Has Internet?: <span style="color: #000; font-weight: bold">'.$key["has_internet"].'</span></span>
         </div><BR>
-        <div class="row pull-right" id="apt-price"> 
-          Monthly Rent: '.$key["price"].'
+
+        <div class="row text-center" id="apt-direction-internet"> 
+          <span style="font-size: 17px">Has Microwave?: <span style="color: #000; font-weight: bold">'.$key["has_microwave"].'</span>
+          <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
+          Has Patio?: <span style="color: #000; font-weight: bold">'.$key["has_patio"].'</span></span>
         </div><BR>
-        <div class="row pull-right" id="apt-internet"> 
-          Has Internet?: '.$key["has_internet"].'
-        </div><BR>
-        <div class="row pull-right" id="apt-microwave"> 
-          Has a Microwave?: '.$key["has_microwave"].'
-        </div><BR>
-        <div class="row pull-right" id="apt-patio"> 
-          Has a Patio?: '.$key["has_patio"].'
-        </div><BR>
-        <div class="row pull-right" id="apt-dishwasher"> 
-          Has a Dishwasher?: '.$key["has_dishwasher"].'
-        </div><BR>
-        <div class="row pull-right" id="apt-washdry"> 
-          Has a Washer and Dryer?: '.$key["has_washdry"].'
+
+        <div class="row text-center" id="apt-direction-internet"> 
+          <span style="font-size: 17px">Has Dishwasher: <span style="color: #000; font-weight: bold">'.$key["has_dishwasher"].'</span>
+          <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
+          Has Washer/Dryer?: <span style="color: #000; font-weight: bold">'.$key["has_washdry"].'</span></span>
         </div>';
 
       // End apartment container
