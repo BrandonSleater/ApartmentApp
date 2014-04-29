@@ -43,28 +43,84 @@
     
 		<!-- Search Form -->
 		<div class="container" id="top-search">
-		  <div class="row">
-				<form role="form" class="go-right" name="apt-search" id="apt-search" action="php/test.php" method="POST">
-          <h1>Search Form:</h1>
+			<form class="form-horizontal" role="form" name="apt-search" id="apt-search" action="php/test.php" method="POST">
+			<fieldset>
+			<h1>Search Form:</h1>
+			<div class="form-group">
+				<input id="name" name="name" type="text" class="form-control" placeholder="Bob Dylan" required>
+				<label for="name">Your Name</label>
+			</div>
+
+			<div class="form-group">
+				<input id="phone" name="phone" type="tel" class="form-control" placeholder="480276842" required>
+				<label for="phone">Primary Phone</label>
+			</div>
+
+			<div class="form-group">
+				<textarea id="message" name="message" class="form-control" placeholder="Some message crap..." required></textarea>
+				<label for="message">Message</label>
+			</div>
+				
 					<div class="form-group">
-						<input id="name" name="name" type="text" class="form-control" placeholder="Bob Dylan" required>
-						<label for="name">Your Name</label>
+				 	 	<label class="col-md-4 control-label" for="plan">Floor Plan:</label>
+				  			<div class="col-md-4">
+				   		 		<select id="plan" name="plan" class="form-control">
+				     	 			<option value="1">1 Bedroom</option>
+				      				<option value="2">2 Bedroom</option>
+				      				<option value="3">Studio</option>
+				    			</select>
+				  			</div>
+						</div>
+
+					<div class="form-group">
+				  		<label class="col-md-4 control-label" for="direction">Window:</label>
+				 	 		<div class="col-md-4">
+				   		 	<select id="direction" name="direction" class="form-control">
+				     			 <option value="1">North</option>
+				      			<option value="2">East</option>
+				      			<option value="3">West</option>
+				   		 	</select>
+				 	 	</div>
 					</div>
 
 					<div class="form-group">
-						<input id="phone" name="phone" type="tel" class="form-control" placeholder="480276842" required>
-						<label for="phone">Primary Phone</label>
+				  		<label class="col-md-4 control-label" for="utilities">Utilities:</label>
+				 		 	<div class="col-md-4">
+				  				<div class="checkbox">
+				   			 		<label for="utilities-0">
+				      					<input name="utilities" id="utilities-0" value="1" type="checkbox">
+				     			 		Washer/Dryer
+				    				</label>
+								</div>
+				 				 <div class="checkbox">
+				    				<label for="utilities-1">
+				      					<input name="utilities" id="utilities-1" value="2" type="checkbox">
+				      					Patio/Balcony
+				    				</label>
+								</div>
+				  			</div>
 					</div>
-
-					<div class="form-group">
-						<textarea id="message" name="message" class="form-control" placeholder="Some message crap..." required></textarea>
-						<label for="message">Message</label>
+				<div class="form-group">
+				  <label class="col-md-4 control-label" for="cooking">Kitchen</label>
+				  <div class="col-md-4">
+				  <div class="checkbox">
+				   		 <label for="cooking-0">
+				      		<input name="cooking" id="cooking-0" value="1" type="checkbox">
+				     		 Microwave
+				    	</label>
 					</div>
+				  <div class="checkbox">
+				    	<label for="cooking-1">
+				      		<input name="cooking" id="cooking-1" value="2" type="checkbox">
+				      		Fridge
+				   		 </label>
+					<div>
+				  </div>
 					<button class="btn btn-lg btn-default">Submit</button>
-				</form>
-		  </div>
+					</fieldset>
+			</form>
 		</div>
-        
+       
         <div class="container">
 	        <div class="row">
 	        	<div class="col-md-12">

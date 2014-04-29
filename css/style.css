@@ -24,7 +24,9 @@ form {
     width: 320px;
     margin: 20px;
 }
-
+h1 {
+   color: #204A65;
+}
 form > div {
     position: relative;
     overflow: hidden;
@@ -63,14 +65,15 @@ form label {
     -webkit-transition: background 0.2s, color 0.2s, top 0.2s, bottom 0.2s, right 0.2s, left 0.2s;
     transition: background 0.2s, color 0.2s, top 0.2s, bottom 0.2s, right 0.2s, left 0.2s;
     position: absolute;
-    color: #999;
+    color: #204A65;
     padding: 7px 6px;
     font-weight: normal;
 }
 
 form textarea {
     display: block;
-    resize: vertical;
+    resize: none;
+
 }
 
 form.go-bottom input, form.go-bottom textarea {
@@ -214,7 +217,7 @@ form.go-right input:focus + label, form.go-right textarea:focus + label {
 }
 
 
-/* Scroll Button */
+ /*Scroll Button */
 .back-to-top {
     cursor: pointer;
     position: fixed;
@@ -250,9 +253,13 @@ form.go-right input:focus + label, form.go-right textarea:focus + label {
 }
 
 .desc-value {
-    color: #2c3e50;
+    color: #204A65;
 }
 
 .verticalLine {
     border-left: thick solid #ff0000;
+}
+
+button {
+    margin-top: 55px;
 }
