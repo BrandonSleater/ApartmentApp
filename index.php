@@ -42,84 +42,112 @@
 		</div>
     
 		<!-- Search Form -->
-		<div class="container" id="top-search">
-			<form class="form-horizontal" role="form" name="apt-search" id="apt-search" action="php/test.php" method="POST">
-			<fieldset>
-			<h1>Search Form:</h1>
-			<div class="form-group">
-				<input id="name" name="name" type="text" class="form-control" placeholder="Bob Dylan" required>
-				<label for="name">Your Name</label>
-			</div>
+		<form class="form-horizontal">
+		<fieldset>
 
-			<div class="form-group">
-				<input id="phone" name="phone" type="tel" class="form-control" placeholder="480276842" required>
-				<label for="phone">Primary Phone</label>
-			</div>
+		<!-- Form Name -->
+		<legend>Form Name</legend>
 
-			<div class="form-group">
-				<textarea id="message" name="message" class="form-control" placeholder="Some message crap..." required></textarea>
-				<label for="message">Message</label>
-			</div>
-				
-					<div class="form-group">
-				 	 	<label class="col-md-4 control-label" for="plan">Floor Plan:</label>
-				  			<div class="col-md-4">
-				   		 		<select id="plan" name="plan" class="form-control">
-				     	 			<option value="1">1 Bedroom</option>
-				      				<option value="2">2 Bedroom</option>
-				      				<option value="3">Studio</option>
-				    			</select>
-				  			</div>
-						</div>
-
-					<div class="form-group">
-				  		<label class="col-md-4 control-label" for="direction">Window:</label>
-				 	 		<div class="col-md-4">
-				   		 	<select id="direction" name="direction" class="form-control">
-				     			 <option value="1">North</option>
-				      			<option value="2">East</option>
-				      			<option value="3">West</option>
-				   		 	</select>
-				 	 	</div>
-					</div>
-
-					<div class="form-group">
-				  		<label class="col-md-4 control-label" for="utilities">Utilities:</label>
-				 		 	<div class="col-md-4">
-				  				<div class="checkbox">
-				   			 		<label for="utilities-0">
-				      					<input name="utilities" id="utilities-0" value="1" type="checkbox">
-				     			 		Washer/Dryer
-				    				</label>
-								</div>
-				 				 <div class="checkbox">
-				    				<label for="utilities-1">
-				      					<input name="utilities" id="utilities-1" value="2" type="checkbox">
-				      					Patio/Balcony
-				    				</label>
-								</div>
-				  			</div>
-					</div>
-				<div class="form-group">
-				  <label class="col-md-4 control-label" for="cooking">Kitchen</label>
-				  <div class="col-md-4">
-				  <div class="checkbox">
-				   		 <label for="cooking-0">
-				      		<input name="cooking" id="cooking-0" value="1" type="checkbox">
-				     		 Microwave
-				    	</label>
-					</div>
-				  <div class="checkbox">
-				    	<label for="cooking-1">
-				      		<input name="cooking" id="cooking-1" value="2" type="checkbox">
-				      		Fridge
-				   		 </label>
-					<div>
-				  </div>
-					<button class="btn btn-lg btn-default">Submit</button>
-					</fieldset>
-			</form>
+		<!-- Text input-->
+		<div class="form-group">
+		  <label class="col-md-4 control-label" for="name">Name:</label>  
+		  <div class="col-md-6">
+		  <input id="name" name="name" type="text" placeholder="Bob Dylan" class="form-control input-md">
+		    
+		  </div>
 		</div>
+
+		<!-- Text input-->
+		<div class="form-group">
+		  <label class="col-md-4 control-label" for="phone">Your Phone:</label>  
+		  <div class="col-md-6">
+		  <input id="phone" name="phone" type="text" placeholder="4805551234" class="form-control input-md">
+		    
+		  </div>
+		</div>
+
+		<!-- Textarea -->
+		<div class="form-group">
+		  <label class="col-md-4 control-label" for="message">Message:</label>
+		  <div class="col-md-4">                     
+		    <textarea class="form-control" id="message" name="message">Some message crap...</textarea>
+		  </div>
+		</div>
+
+		<!-- Select Basic -->
+		<div class="form-group">
+		  <label class="col-md-4 control-label" for="plan">Floor Plan:</label>
+		  <div class="col-md-6">
+		    <select id="plan" name="plan" class="form-control">
+		      <option value="1">1 Bedroom</option>
+		      <option value="2">2 Bedroom</option>
+		      <option value="3">Studio</option>
+		    </select>
+		  </div>
+		</div>
+
+		<!-- Select Basic -->
+		<div class="form-group">
+		  <label class="col-md-4 control-label" for="window">Window:</label>
+		  <div class="col-md-6">
+		    <select id="window" name="window" class="form-control">
+		      <option value="1">North</option>
+		      <option value="2">East</option>
+		      <option value="3">West</option>
+		    </select>
+		  </div>
+		</div>
+
+		<!-- Multiple Checkboxes -->
+		<div class="form-group">
+		  <label class="col-md-4 control-label" for="util">Utilities:</label>
+		  <div class="col-md-4">
+		  <div class="checkbox">
+		    <label for="util-0">
+		      <input type="checkbox" name="util" id="util-0" value="1">
+		      Washer/Dryer
+		    </label>
+			</div>
+		  <div class="checkbox">
+		    <label for="util-1">
+		      <input type="checkbox" name="util" id="util-1" value="2">
+		      Patio/Balcony
+		    </label>
+			</div>
+		  </div>
+		</div>
+
+		<!-- Multiple Checkboxes -->
+		<div class="form-group">
+  		<label class="col-md-4 control-label" for="kitchen">Kitchen:</label>
+  			<div class="col-md-4">l
+  				<div class="checkbox">
+    			<label for="kitchen-0">
+      				<input type="checkbox" name="kitchen" id="kitchen-0" value="1">
+      				Microwave
+   				</label>
+			</div>
+  			<div class="checkbox">
+    			<label for="kitchen-1">
+      				<input type="checkbox" name="kitchen" id="kitchen-1" value="2">
+     				 Fridge
+    			</label>
+			</div>
+  		</div>
+		</div>
+
+		<!-- Button -->
+		<div class="form-group">
+  		<label class="col-md-4 control-label" for="search">Submit</label>
+ 			<div class="col-md-4">
+    			<button id="search" name="search" class="btn btn-primary">Search</button>
+  			</div>
+		</div>
+
+		</fieldset>
+	</form>
+
+		<!-- End Search Form-->
        
         <div class="container">
 	        <div class="row">
