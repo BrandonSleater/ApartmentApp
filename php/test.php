@@ -1,7 +1,7 @@
 <?php
 
-include 'model.php';
+	include 'model.php';
 
-	$model = new model($_POST);
+	$model = new model($_POST, 'search');
 
 ?>

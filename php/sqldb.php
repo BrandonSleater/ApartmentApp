@@ -70,6 +70,18 @@ class sqldb {
     return $data;
   }
   
+
+  public function createSQL($sql) {
+
+    $query = $this->conn->query($sql);
+
+    if (! $query) {
+      printf("Errormessage: %s\n", $this->conn->error);
+    }
+
+    return $this->conn->insert_id;
+  }
+
   
   /**
    * This function is used for preparing our SQL statements

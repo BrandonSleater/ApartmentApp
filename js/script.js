@@ -14,16 +14,12 @@ $(document).ready(function(){
     
     $('#back-to-top').click(function () {
         
-        $('#back-to-top').tooltip('hide');
-        
         $('body,html').animate({
             scrollTop: 0
         }, 800);
         
         return false;
     });
-
-    $('#back-to-top').tooltip('show');
 
     $(function() {
         $('.flexslider').flexslider();
@@ -50,4 +46,32 @@ $("#apt-search").submit(function(e) {
     });
     
     e.preventDefault();
+});
+
+
+/**
+ * Handle our search requests
+ */
+$("#create-form").submit(function(e) {
+    
+    var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+    
+    $.ajax({
+        url : formURL,
+        type: "POST",
+        data : postData,
+        success: function(data) {
+            $("#create-form").removeClass("col-md-offset-3");
+            $('#new-apt').html(data);
+            $('#create-form')[0].reset();
+        },
+        error: function() {}
+    });
+    
+    e.preventDefault();
+});
+
+$("#create-apt").click(function() {
+    $('#create-result').style.display = "block";
 });

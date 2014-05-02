@@ -5,13 +5,17 @@ include 'sqldb.php';
 class model extends sqldb {
   
 
-  function __construct($args = FALSE) {
+  function __construct($post, $type) {
     
     // Currently, no reason to pass another config to our sql class
     parent::__construct();
     
+    $type = ($type == 'search') ? 'search' : 'create';
+
+    $type .= '_query';
+
     // On instantiation, run our search query
-    $this->search_query($args);
+    $this->$type($post);
   }
   
   
@@ -37,8 +41,11 @@ class model extends sqldb {
    *  - has_dishwasher = Dishwasher (0,1)
    *  - has_washdry = Washer and Dryer (0,1)
    */
-  public function search_query($post) {
+  public function search_query($post = FALSE, $id = FALSE) {
     
+    $post = ($post !== FALSE) ? $post : '';
+    $id = ($id !== FALSE) ? "AND a.apart_pk = $id" : '';
+
     // Lets clean up the data before we give it to our database
     //$data = $this->cleanPOSTData($post);
     
@@ -59,6 +66,7 @@ class model extends sqldb {
         building AS b ON b.build_pk = a.build_fk
       WHERE
         a.status = 1
+      ".$id."
       ORDER BY
         a.price
     ";
@@ -71,7 +79,121 @@ class model extends sqldb {
 
     // Give our data to our html generator
     //$this->buildHTML($html);
-    $this->buildHTML($html);
+    if ($id === FALSE) {
+      $this->buildHTML($html);
+    } else {
+      return $html;
+    }
+  }
+
+
+  public function create_query($post) {
+    
+    // Lets clean up the data before we give it to our database
+    $data = $this->cleanPOSTData($post);
+
+    // SQL query
+    $query = '
+      INSERT INTO apartment 
+      (
+        build_fk,
+        story,
+        floorplan,
+        status,
+        price,
+        has_internet,
+        has_microwave,
+        has_patio,
+        has_dishwasher,
+        has_washdry
+      )
+      VALUES
+      ('.$data['window'].',
+       1,
+       "'.$data["floorplan"].'",
+       1,
+       '.$data["price"].',
+       '.$data["has_internet"].',
+       '.$data["has_microwave"].',
+       '.$data["has_patio"].',
+       '.$data["has_dishwasher"].',
+       '.$data["has_washdry"].')   
+    ';
+    
+    // Run the query. The values are received in the form of an associative array
+    $id = $this->createSQL($query);
+
+    $html = $this->search_query(FALSE, $id);
+
+    // Give our data to our html generator
+    $this->buildSingleHTML($html);
+  }
+
+
+    /**
+   * This will sanitize our inputs before we use them in the sql
+   * (sql injection prevention)
+   */
+  private function cleanPOSTData($post) {
+
+    $data = array();
+
+    $data['window'] = (array_key_exists('window', $post)) ? $post['window'] : 0;
+    $data['floorplan'] = (array_key_exists('floorplan', $post)) ? $post['floorplan'] : 'studio';
+    $data['price'] = (array_key_exists('price', $post) && is_numeric($post['price'])) ? $post['price'] : 0;
+    $data['has_internet'] = (array_key_exists('has_internet', $post) == 1) ? 1 : 0; 
+    $data['has_microwave'] = (array_key_exists('has_microwave', $post) == 1) ? 1 : 0; 
+    $data['has_patio'] = (array_key_exists('has_patio', $post) == 1) ? 1 : 0; 
+    $data['has_dishwasher'] = (array_key_exists('has_dishwasher', $post) == 1) ? 1 : 0; 
+    $data['has_washdry'] = (array_key_exists('has_washdry', $post) == 1) ? 1 : 0; 
+
+    return $data;
+  }
+
+
+  /**
+   * This will reformat the data from the sql to something visually
+   * more appealing to the client
+   */
+  private function cleanSQLData($sql) {
+
+    foreach ($sql as $value => $key) {
+
+      foreach ($key as $data => $result) {
+        
+        switch ($data) {
+
+          case 'floorplan':   
+            // Handle "studio"
+            $sql[$value][$data] = ucfirst($result);
+
+            // Handle "1Bed,2Bed"
+            if (is_numeric($result[0])) {
+              $sql[$value][$data] = preg_replace('/^.{1}/', "$0 ", $result."room");
+            }
+            break;
+
+          case 'price':
+            // Handle dollar sign
+            $sql[$value][$data] = preg_replace('/^/', "$$0", $result);
+            break;
+
+          case 'has_internet':
+          case 'has_washdry':
+          case 'has_dishwasher':
+          case 'has_patio':
+          case 'has_microwave':
+            // Handle 0 and 1
+            $sql[$value][$data] = ($result) ? 'Yes' : 'No';
+            break;
+
+          default:
+            break;
+        }
+      }
+    }
+
+    return $sql;
   }
 
 
@@ -156,57 +278,64 @@ class model extends sqldb {
   }
 
 
-  /**
-   * This will sanitize our inputs before we use them in the sql
-   * (sql injection prevention)
-   */
-  private function cleanPOSTData($post) {
+  public function buildSingleHTML($data) {
 
-  }
+    // Search results container
+    $html = '';
 
+    // Counter for box switching
+    $switch = 1;
 
-  /**
-   * This will reformat the data from the sql to something visually
-   * more appealing to the client
-   */
-  private function cleanSQLData($sql) {
+    foreach($data as $value => $key) {
 
-    foreach ($sql as $value => $key) {
+      // Determine which photo we are using
+      switch ($key['floorplan']) {
+        case 'Studio':
+          $img = 'studio';
+          break;
 
-      foreach ($key as $data => $result) {
-        
-        switch ($data) {
+        case '1 Bedroom':
+          $img = '1bed';
+          break;
 
-          case 'floorplan':   
-            // Handle "studio"
-            $sql[$value][$data] = ucfirst($result);
+        case '2 Bedroom':
+          $img = '2bed';
+          break;
 
-            // Handle "1Bed,2Bed"
-            if (is_numeric($result[0])) {
-              $sql[$value][$data] = preg_replace('/^.{1}/', "$0 ", $result."room");
-            }
-            break;
-
-          case 'price':
-            // Handle dollar sign
-            $sql[$value][$data] = preg_replace('/^/', "$$0", $result);
-            break;
-
-          case 'has_internet':
-          case 'has_washdry':
-          case 'has_dishwasher':
-          case 'has_patio':
-          case 'has_microwave':
-            // Handle 0 and 1
-            $sql[$value][$data] = ($result) ? 'Yes' : 'No';
-            break;
-
-          default:
-            break;
-        }
+        default:
+          break;
       }
+
+      // Each row of data
+      $html .= '
+        <div class="row text-center" id="apt-image">
+          <img src="images/'.$img.'.png" alt="apartment image" class="img-rounded" width="95%" height="180px">
+        </div>
+
+        <div class="row text-center" id="apt-floorplan"> 
+          <h3>'.$key["floorplan"].' - '.$key["price"].'/month</h3><hr style="width: 70%">
+        </div>
+
+        <div class="row text-center" id="apt-direction-internet"> 
+          <span style="font-size: 17px">Direction Facing: <span style="color: #3498db; font-weight: bold">'.$key["build_name"].'</span>
+          <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
+          Has Internet?: <span style="color: #3498db; font-weight: bold">'.$key["has_internet"].'</span></span>
+        </div><BR>
+
+        <div class="row text-center" id="apt-direction-internet"> 
+          <span style="font-size: 17px">Has Microwave?: <span style="color: #3498db; font-weight: bold">'.$key["has_microwave"].'</span>
+          <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
+          Has Patio?: <span style="color: #3498db; font-weight: bold">'.$key["has_patio"].'</span></span>
+        </div><BR>
+
+        <div class="row text-center" id="apt-direction-internet"> 
+          <span style="font-size: 17px">Has Dishwasher: <span style="color: #3498db; font-weight: bold">'.$key["has_dishwasher"].'</span>
+          <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
+          Has Washer/Dryer?: <span style="color: #3498db; font-weight: bold">'.$key["has_washdry"].'</span></span>
+        </div>';
     }
 
-    return $sql;
+    // Send our html to the client
+    echo $html;
   }
 }
