@@ -38,8 +38,8 @@
 				<div class="collapse navbar-collapse navHeaderCollapse">
 					<ul class="nav navbar-nav navbar-right">
 				    	<li class="active"><a href="index.php">Home</a></li>
+				      <li><a href="admin.php">Admin</a></li>
 				      <li><a href="about.php">About</a></li>
-				      <li><a href="contact.php">Contact</a></li>
 				  </ul>
 				</div>
 			</div>
