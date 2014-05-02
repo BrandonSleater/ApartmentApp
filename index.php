@@ -5,11 +5,11 @@
 	<head>
 		<!-- Headers -->
 		<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CST433 Final Project: Queries with the Selenium Apartment Database">
-    <meta name="author" content="Brandon Sleater, Joseph Stratton, Dominic Smith">
-    <title>Selenium Apartments</title>
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="CST433 Final Project: Queries with the Selenium Apartment Database">
+	    <meta name="author" content="Brandon Sleater, Joseph Stratton, Dominic Smith">
+	    <title>Selenium Apartments</title>
 
 		<!-- JQuery -->
 		<script src="https://code.jquery.com/jquery-2.1.0.min.js" defer></script>
@@ -43,69 +43,65 @@
 
 		<!-- Select Basic -->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="plan">Floor Plan:</label>
-		  <div class="col-md-6">
-		    <select id="plan" name="plan" class="form-control input-large">
-		      <option value="1">1 Bedroom</option>
-		      <option value="2">2 Bedroom</option>
-		      <option value="3">Studio</option>
-		    </select>
-		  </div>
+		  	<label class="col-md-4 control-label" for="plan">Floor Plan:</label>
+		  	<div class="col-md-6">
+			    <select id="plan" name="plan" class="form-control input-large">
+			      <option value="1">1 Bedroom</option>
+			      <option value="2">2 Bedroom</option>
+			      <option value="3">Studio</option>
+			    </select>
+		  	</div>
 		</div>
 
 		<!-- Select Basic -->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="window">Window:</label>
-		  <div class="col-md-6">
-		    <select id="window" name="window" class="form-control input-large">
-		      <option value="1">North</option>
-		      <option value="2">East</option>
-		      <option value="3">West</option>
-		    </select>
-		  </div>
+		  	<label class="col-md-4 control-label" for="window">Window:</label>
+		  	<div class="col-md-6">
+			    <select id="window" name="window" class="form-control input-large">
+			      <option value="1">North</option>
+			      <option value="2">East</option>
+			      <option value="3">West</option>
+			    </select>
+		  	</div>
 		</div>
 
 		<!-- Multiple Checkboxes -->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="util">Utilities:</label>
-		  <div class="col-md-4">
-		  <div class="checkbox">
-		    <label for="util-0">
-		      <input type="checkbox" name="util" id="util-0" value="1">
-		      Washer/Dryer
-		    </label>
-			</div>
-		  <div class="checkbox">
-		    <label for="util-1">
-		      <input type="checkbox" name="util" id="util-1" value="2">
-		      Patio/Balcony
-		    </label>
-			</div>
-		  </div>
+		  	<label class="col-md-4 control-label" for="util">Utilities:</label>
+		  	<div class="col-md-4">
+			  	<div class="checkbox">
+			    	<label for="util-0">
+			      		<input type="checkbox" name="util" id="util-0" value="1"> Washer/Dryer
+			    	</label>
+				</div>
+			  	<div class="checkbox">
+			    	<label for="util-1">
+			      		<input type="checkbox" name="util" id="util-1" value="2"> Patio/Balcony
+			    	</label>
+				</div>
+		  	</div>
 		</div>
 
 		<!-- Multiple Checkboxes -->
 		<div class="form-group">
-  		<label class="col-md-4 control-label" for="kitchen">Kitchen:</label>
+  			<label class="col-md-4 control-label" for="kitchen">Kitchen:</label>
   			<div class="col-md-4">
   				<div class="checkbox">
-    			<label for="kitchen-0">
-      				<input type="checkbox" name="kitchen" id="kitchen-0" value="1">
-      				Microwave
-   				</label>
-			</div>
-  			<div class="checkbox">
-    			<label for="kitchen-1">
-      				<input type="checkbox" name="kitchen" id="kitchen-1" value="2">
-     				 Fridge
-    			</label>
-			</div>
-  		</div>
+	    			<label for="kitchen-0">
+	      				<input type="checkbox" name="kitchen" id="kitchen-0" value="1"> Microwave
+	   				</label>
+				</div>
+  				<div class="checkbox">
+	    			<label for="kitchen-1">
+	      				<input type="checkbox" name="kitchen" id="kitchen-1" value="2"> Fridge
+	    			</label>
+				</div>
+  			</div>
 		</div>
 
 		<!-- Button -->
 		<div class="form-group">
-  		<label class="col-md-4 control-label" for="search">Submit</label>
+  			<label class="col-md-4 control-label" for="search">Submit</label>
  			<div class="col-md-4">
     			<button id="search" name="search" class="btn btn-primary">Search</button>
   			</div>

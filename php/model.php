@@ -58,8 +58,7 @@ class model extends sqldb {
       INNER JOIN
         building AS b ON b.build_pk = a.build_fk
       WHERE
-        a.status = 1 AND
-        a.has_internet = 0
+        a.status = 1
       ORDER BY
         a.price
     ";
