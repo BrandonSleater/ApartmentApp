@@ -48,7 +48,7 @@
 		<div class="container apt-form">
 			<div class="text-center col-md-12">
 				<h2>Search for Apartments</h2>
-				<hr style="border-color: #7f8c8d">
+				<hr class="hr-style1">
 			</div>
 			<form class="form-horizontal col-md-5" style="" role="form" name="apt-search" id="apt-search" action="php/test.php" method="POST">
 				<!-- Select Basic -->
