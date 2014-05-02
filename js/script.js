@@ -24,6 +24,10 @@ $(document).ready(function(){
     });
 
     $('#back-to-top').tooltip('show');
+
+    $(function() {
+        $('.flexslider').flexslider();
+    });
 });
 
 
