@@ -40,45 +40,12 @@
 				</div>
 			</div>
 		</div>
-    
-		<!-- Search Form -->
-		<form class="form-horizontal">
-		<fieldset>
-
-		<!-- Form Name -->
-		<legend>Form Name</legend>
-
-		<!-- Text input-->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="name">Name:</label>  
-		  <div class="col-md-6">
-		  <input id="name" name="name" type="text" placeholder="Bob Dylan" class="form-control input-md">
-		    
-		  </div>
-		</div>
-
-		<!-- Text input-->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="phone">Your Phone:</label>  
-		  <div class="col-md-6">
-		  <input id="phone" name="phone" type="text" placeholder="4805551234" class="form-control input-md">
-		    
-		  </div>
-		</div>
-
-		<!-- Textarea -->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="message">Message:</label>
-		  <div class="col-md-4">                     
-		    <textarea class="form-control" id="message" name="message">Some message crap...</textarea>
-		  </div>
-		</div>
 
 		<!-- Select Basic -->
 		<div class="form-group">
 		  <label class="col-md-4 control-label" for="plan">Floor Plan:</label>
 		  <div class="col-md-6">
-		    <select id="plan" name="plan" class="form-control">
+		    <select id="plan" name="plan" class="form-control input-large">
 		      <option value="1">1 Bedroom</option>
 		      <option value="2">2 Bedroom</option>
 		      <option value="3">Studio</option>
@@ -90,7 +57,7 @@
 		<div class="form-group">
 		  <label class="col-md-4 control-label" for="window">Window:</label>
 		  <div class="col-md-6">
-		    <select id="window" name="window" class="form-control">
+		    <select id="window" name="window" class="form-control input-large">
 		      <option value="1">North</option>
 		      <option value="2">East</option>
 		      <option value="3">West</option>
@@ -120,7 +87,7 @@
 		<!-- Multiple Checkboxes -->
 		<div class="form-group">
   		<label class="col-md-4 control-label" for="kitchen">Kitchen:</label>
-  			<div class="col-md-4">l
+  			<div class="col-md-4">
   				<div class="checkbox">
     			<label for="kitchen-0">
       				<input type="checkbox" name="kitchen" id="kitchen-0" value="1">
@@ -143,9 +110,6 @@
     			<button id="search" name="search" class="btn btn-primary">Search</button>
   			</div>
 		</div>
-
-		</fieldset>
-	</form>
 
 		<!-- End Search Form-->
        

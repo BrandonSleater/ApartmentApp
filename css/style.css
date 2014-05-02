@@ -260,6 +260,9 @@ form.go-right input:focus + label, form.go-right textarea:focus + label {
     border-left: thick solid #ff0000;
 }
 
-button {
-    margin-top: 55px;
+.form-group {
+   margin-top: 60px;
+   margin-left: 10px;
+   padding-bottom: 8px;
+   width: 50%;
 }
