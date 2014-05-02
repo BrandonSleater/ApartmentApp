@@ -14,10 +14,10 @@
 
 		<div class="container apt-form">
 			<div class="text-center col-md-12">
-				<h2>Search for Apartments</h2>
+				<h2>Create New Apartment</h2>
 				<hr class="hr-style1">
 			</div>
-			<form class="form-horizontal col-md-5" style="" role="form" name="apt-search" id="apt-search" action="php/test.php" method="POST">
+			<form class="form-horizontal col-md-10" style="" role="form" name="apt-search" id="apt-search" action="php/test.php" method="POST">
 				<!-- Select Basic -->
 				<div class="form-group frm-inp-sm" style="margin-top: 20px">
 				  	<label class="col-md-6 control-label" for="plan">Floor Plan:</label>
@@ -77,8 +77,8 @@
 
 				<!-- Button -->
 				<div class="form-group">
-		 			<div class="col-md-8 col-md-offset-3 text-center">
-		    			<button id="search" name="search" class="btn btn-primary btn-block" style="margin: -15px 0 0 5px">Search</button>
+		 			<div class="col-md-5 col-md-offset-5 text-center">
+		    			<button id="search" name="search" class="btn btn-primary btn-block" style="margin-top: -15px">Add Apartment</button>
 		  			</div>
 				</div>
 			</form>
