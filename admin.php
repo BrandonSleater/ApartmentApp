@@ -9,7 +9,7 @@
 		<?php 
 			include 'php/nav.php'; 
 
-			nav();
+			nav(1);
 		?>
 
 		<div class="container apt-form">
@@ -82,22 +82,6 @@
 		  			</div>
 				</div>
 			</form>
-
-			<div class="col-md-6 pull-right">
-				<div class="flexslider">
-				  	<ul class="slides">
-				    	<li>
-				    		<img src="images/1bed.png" />
-					    </li>
-					    <li>
-				      		<img src="images/2bed.png" />
-					    </li>
-					    <li>
-				      		<img src="images/studio.png" />
-				    	</li>
-				  	</ul>
-				</div>
-			</div>
 
 			<!-- End Search Form-->
 	       

@@ -110,3 +110,18 @@ body {
     background-image:     -ms-linear-gradient(left, rgba(204,204,204,0), rgba(204,204,204,0.75), rgba(204,204,204,0)); 
     background-image:      -o-linear-gradient(left, rgba(204,204,204,0), rgba(204,204,204,0.75), rgba(204,204,204,0)); 
 }
+
+.hr-style2 {
+    border: 0;
+    border-bottom: 1px dashed #ccc;
+    background: #999;
+}
+
+.ab-title {
+    font-weight: 700;
+}
+
+.ab-desc {
+    font-weight: 300;
+    font-style: italic;
+}
