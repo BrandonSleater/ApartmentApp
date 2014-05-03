@@ -16,8 +16,8 @@
 
 					<div class="form-group frm-inp-sm" style="margin-top: 5px">
 					  	<label class="col-md-6 control-label" for="floorplan">Floor Plan:</label>
-					  	
-					  	<div class="col-md-4">
+
+					  	<div class="col-md-5">
 						    <select id="floorplan" name="floorplan" class="form-control input-large">
 						      <option value="1Bed">1 Bedroom</option>
 						      <option value="2Bed">2 Bedroom</option>
@@ -37,7 +37,7 @@
 					<div class="form-group frm-inp-sm">
 					  	<label class="col-md-6 control-label" for="window">Window:</label>
 					  	
-					  	<div class="col-md-3">
+					  	<div class="col-md-4">
 						    <select id="window" name="window" class="form-control input-large">
 						      <option value="1">North</option>
 						      <option value="2">East</option>
