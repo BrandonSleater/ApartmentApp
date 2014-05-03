@@ -8,7 +8,7 @@ class controller {
   public $data;   // Holds the formatted results
 
   /**
-   * Supp bro?
+   * Not much happening here..
    */
   function __construct() {
     

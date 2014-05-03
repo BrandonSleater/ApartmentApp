@@ -45,8 +45,8 @@ class model extends sqldb {
    * off to our database sql class to be processed. Once we receive the
    * sql results, we give it to our html generator to display
    * 
-   * @param  array $post [data collected from the form]
-   * @param  int   $id   [id of a new apartment]
+   * @param  [array] $post [data collected from the form]
+   * @param  [int]   $id   [id of a new apartment]
    */
   public function searchQuery($post = FALSE, $id = FALSE) {
 
@@ -127,7 +127,7 @@ class model extends sqldb {
     $this->squery = $query;
     
     // Run the query. The values are received in the form of an associative array
-    $result = $this->runSQL($query);
+    $result = $this->searchSQL($query);
     
     // Clean up our inputs for the html
     $this->control->cleanSQLData($result);
@@ -189,3 +189,5 @@ class model extends sqldb {
     $this->searchQuery(FALSE, $id);
   }
 }
+
+?>

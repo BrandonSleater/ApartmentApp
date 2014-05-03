@@ -1,5 +1,6 @@
 <?php
 
+	// Send off our html page head
 	echo '
 	<head>
 		<!-- Headers -->
