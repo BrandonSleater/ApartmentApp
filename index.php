@@ -31,13 +31,13 @@
 				</div>
 
 				<div class="form-group" style="margin-bottom: -50px">
-				  	<label class="col-md-6 control-label" for="window">Price:</label>
+				  	<label class="col-md-6 control-label" for="p_range">Price:</label>
 					<div class="radio-inline">
 					  <label>
-					    <input type="radio" style="margin-left: 0" name="optionsRadios" id="optionsRadios1" value="lt" checked> < 800		
+					    <input type="radio" style="margin-left: 0" name="p_range" id="p-lt" value="lt" checked> <= 700		
 					  </label>
 					  <label>
-					    <input type="radio" style="margin-left: 10px" name="optionsRadios" id="optionsRadios2" value="gt"> > 800
+					    <input type="radio" style="margin-left: 10px" name="p_range" id="p-gt" value="gt"> > 700
 					  </label>
 					</div>
 				</div>
@@ -95,7 +95,7 @@
 				<!-- Button -->
 				<div class="form-group">
 		 			<div class="col-md-8 col-md-offset-3 text-center">
-		    			<button id="search" name="search" class="btn btn-primary btn-block" style="margin: -25px 0 0 5px">Search</button>
+		    			<button id="search-apt" name="search-apt" class="btn btn-primary btn-block" style="margin: -25px 0 0 5px">Search</button>
 		  			</div>
 				</div>
 			</form>
@@ -115,18 +115,15 @@
 				  	</ul>
 				</div>
 			</div>
+		</div>
 
-			<!-- End Search Form-->
-	       
-	        <div class="container" id="srch-result" style="display: none">
-		        <div class="row">
-		        	<div class="col-md-12">
-		            	<h1>Search Results:</h1><hr>
-		          	</div>
-		        </div>
-
-				<div class="row" id="search-results"></div>
+        <div class="container apt-form" id="reslt" style="display: none; height: 100%; margin-bottom: 30px;">
+			<div class="text-center col-md-12">
+				<h2>Search Results</h2>
+				<hr class="hr-style1">
 			</div>
+
+			<div class="row" id="search-results"></div>
 		</div>
 
 		<a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>

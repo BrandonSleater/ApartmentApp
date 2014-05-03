@@ -40,6 +40,7 @@ $("#apt-search").submit(function(e) {
         type: "POST",
         data : postData,
         success: function(data) {
+            $('html, body').animate({ scrollTop: $('#reslt').offset().top }, 500);
             $('#search-results').html(data);
         },
         error: function() {}
@@ -70,6 +71,10 @@ $("#create-form").submit(function(e) {
     });
     
     e.preventDefault();
+});
+
+$("#search-apt").click(function() {    
+    $('#reslt').show();
 });
 
 $("#create-apt").click(function() {

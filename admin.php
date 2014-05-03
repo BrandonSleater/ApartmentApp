@@ -34,7 +34,7 @@
 					<div class="form-group frm-inp-sm">
 					  	<label class="col-md-6 control-label" for="price">Price:</label>
 					  	<div class="col-md-3">
-						    <input type="text" id="price" name="price" class="form-control input-medium" required>
+						    <input type="text" id="price" name="price" placeholder="500" class="form-control input-medium" required>
 					  	</div>
 					</div>
 
@@ -50,7 +50,7 @@
 					</div>
 
 					<!-- Multiple Checkboxes -->
-					<div class="form-group frm-inp-sm">
+					<div class="form-group" style="margin-bottom: -40px">
 					  	<label class="col-md-6 control-label" for="util">Utilities:</label>
 					  	<div class="col-md-4">
 						  	<div class="checkbox">
@@ -91,7 +91,7 @@
 					<!-- Button -->
 					<div class="form-group">
 			 			<div class="col-md-6 col-md-offset-5 text-center">
-			    			<button id="create-apt" class="btn btn-primary btn-block" style="margin-top: -50px; margin-left: -45px">Add Apartment</button>
+			    			<button id="create-apt" class="btn btn-primary btn-block" style="margin-top: -40px; margin-left: -45px">Add Apartment</button>
 			  			</div>
 					</div>
 				</form>

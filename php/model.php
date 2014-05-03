@@ -4,6 +4,9 @@ include 'sqldb.php';
 
 class model extends sqldb {
   
+  public $squery;
+  public $cquery;
+
 
   function __construct($post, $type) {
     
@@ -42,13 +45,25 @@ class model extends sqldb {
    *  - has_washdry = Washer and Dryer (0,1)
    */
   public function search_query($post = FALSE, $id = FALSE) {
-    
-    $post = ($post !== FALSE) ? $post : '';
-    $id = ($id !== FALSE) ? "AND a.apart_pk = $id" : '';
 
-    // Lets clean up the data before we give it to our database
-    //$data = $this->cleanPOSTData($post);
-    
+    if ($post !== FALSE) {
+      // Lets clean up the data before we give it to our database
+      $data = $this->cleanPOSTData($post);
+      $fp    = ' AND a.floorplan = "'.$data['floorplan'].'"';
+      $price = ($data['p_range'] == 1) ? ' AND a.price>700' : ' AND a.price<=700';
+      $wind  = ' AND a.build_fk = ' . $data['window'];
+      $intr  = ($data['has_internet'] == 1) ? ' AND a.has_internet = ' .$data['has_internet'] : '';
+      $micro = ($data['has_microwave'] == 1) ? ' AND a.has_microwave = ' .$data['has_microwave'] : '';
+      $patio = ($data['has_patio'] == 1) ? ' AND a.has_patio = ' .$data['has_patio'] : '';
+      $dish  = ($data['has_dishwasher'] == 1) ? ' AND a.has_dishwasher = ' .$data['has_dishwasher'] : '';
+      $wash  = ($data['has_washdry'] == 1) ? ' AND a.has_washdry = ' .$data['has_washdry'] : '';
+    } else {
+      $post = $fp = $price = $wind = $intr = $micro = $patio = $dish = $wash = '';
+
+    }
+
+    $id    = ($id !== FALSE) ? " AND a.apart_pk = $id" : "";
+
     // SQL query
     $query = "
       SELECT
@@ -67,9 +82,19 @@ class model extends sqldb {
       WHERE
         a.status = 1
       ".$id."
+      ".$fp."
+      ".$price."
+      ".$wind."
+      ".$intr."
+      ".$micro."
+      ".$patio."
+      ".$dish."
+      ".$wash."
       ORDER BY
         a.price
     ";
+
+    $this->squery = $query;
     
     // Run the query. The values are received in the form of an associative array
     $result = $this->runSQL($query);
@@ -78,8 +103,7 @@ class model extends sqldb {
     $html = $this->cleanSQLData($result);
 
     // Give our data to our html generator
-    //$this->buildHTML($html);
-    if ($id === FALSE) {
+    if ($id == NULL) {
       $this->buildHTML($html);
     } else {
       return $html;
@@ -119,6 +143,8 @@ class model extends sqldb {
        '.$data["has_dishwasher"].',
        '.$data["has_washdry"].')   
     ';
+
+    $this->cquery = $query;
     
     // Run the query. The values are received in the form of an associative array
     $id = $this->createSQL($query);
@@ -146,6 +172,7 @@ class model extends sqldb {
     $data['has_patio'] = (array_key_exists('has_patio', $post) == 1) ? 1 : 0; 
     $data['has_dishwasher'] = (array_key_exists('has_dishwasher', $post) == 1) ? 1 : 0; 
     $data['has_washdry'] = (array_key_exists('has_washdry', $post) == 1) ? 1 : 0; 
+    $data['p_range'] = (array_key_exists('p_range', $post) && $post['p_range'] == 'gt') ? 1 : 0;
 
     return $data;
   }
@@ -199,79 +226,103 @@ class model extends sqldb {
 
   public function buildHTML($data) {
 
-    // Search results container
-    $html = '<div class="col-sm-12" style="padding-bottom: 50px">';
+    if (!empty($data)) {
+      // Search results container
+      $html = '<div class="col-sm-12">';
 
-    // Counter for box switching
-    $switch = 1;
+      $html .= '<button class="btn btn-primary btn-sm" data-toggle="modal" style="position: absolute; left: 10px; top: -80px" data-target="#sqlModal">SQL Code</button>';
 
-    foreach($data as $value => $key) {
+      // Counter for box switching
+      $switch = 1;
 
-      // Which sides the box is on
-      $side = ($switch) ? 'left' : 'right';
+      foreach($data as $value => $key) {
 
-      $html .= ($switch) ? '<div class="row" style="padding-bottom: 40px">' : '';
+        // Which sides the box is on
+        $side = ($switch) ? 'left' : 'right';
 
-      // Apartment container
-      $html .= '<div class="col-sm-5 cont-border pull-'.$side.'" style="margin-'.$side.': 70px">';
+        $html .= ($switch) ? '<div class="row" style="padding-bottom: 40px">' : '';
 
-      // Determine which photo we are using
-      switch ($key['floorplan']) {
-        case 'Studio':
-          $img = 'studio';
-          break;
+        // Apartment container
+        $html .= '<div class="col-sm-5 cont-border apt-cont pull-'.$side.'" style="margin-'.$side.': 70px">';
 
-        case '1 Bedroom':
-          $img = '1bed';
-          break;
+        // Determine which photo we are using
+        switch ($key['floorplan']) {
+          case 'Studio':
+            $img = 'studio';
+            break;
 
-        case '2 Bedroom':
-          $img = '2bed';
-          break;
+          case '1 Bedroom':
+            $img = '1bed';
+            break;
 
-        default:
-          break;
+          case '2 Bedroom':
+            $img = '2bed';
+            break;
+
+          default:
+            break;
+        }
+
+        // Each row of data
+        $html .= '
+          <div class="row text-center" id="apt-image">
+            <img src="images/'.$img.'.png" alt="apartment image" class="img-rounded" width="95%" height="180px">
+          </div>
+
+          <div class="row text-center" id="apt-floorplan"> 
+            <h3>'.$key["floorplan"].' - '.$key["price"].'/month</h3><hr style="width: 70%">
+          </div><BR>
+
+          <div class="row text-center" id="apt-direction-internet"> 
+            <span style="font-size: 17px">Direction Facing: <span style="color: #000; font-weight: bold">'.$key["build_name"].'</span>
+            <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
+            Has Internet?: <span style="color: #000; font-weight: bold">'.$key["has_internet"].'</span></span>
+          </div><BR>
+
+          <div class="row text-center" id="apt-direction-internet"> 
+            <span style="font-size: 17px">Has Microwave?: <span style="color: #000; font-weight: bold">'.$key["has_microwave"].'</span>
+            <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
+            Has Patio?: <span style="color: #000; font-weight: bold">'.$key["has_patio"].'</span></span>
+          </div><BR>
+
+          <div class="row text-center" id="apt-direction-internet"> 
+            <span style="font-size: 17px">Has Dishwasher: <span style="color: #000; font-weight: bold">'.$key["has_dishwasher"].'</span>
+            <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
+            Has Washer/Dryer?: <span style="color: #000; font-weight: bold">'.$key["has_washdry"].'</span></span>
+          </div>';
+
+        // End apartment container
+        $html .= '</div>';
+
+        $html .= (! $switch) ? '</div>' : '';
+
+        // Handles flipping between sides
+        $switch = ($switch) ? 0 : 1;
       }
 
-      // Each row of data
-      $html .= '
-        <div class="row text-center" id="apt-image">
-          <img src="images/'.$img.'.png" alt="apartment image" class="img-rounded" width="95%" height="180px">
-        </div>
-
-        <div class="row text-center" id="apt-floorplan"> 
-          <h3>'.$key["floorplan"].' - '.$key["price"].'/month</h3><hr style="width: 70%">
-        </div><BR>
-
-        <div class="row text-center" id="apt-direction-internet"> 
-          <span style="font-size: 17px">Direction Facing: <span style="color: #000; font-weight: bold">'.$key["build_name"].'</span>
-          <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
-          Has Internet?: <span style="color: #000; font-weight: bold">'.$key["has_internet"].'</span></span>
-        </div><BR>
-
-        <div class="row text-center" id="apt-direction-internet"> 
-          <span style="font-size: 17px">Has Microwave?: <span style="color: #000; font-weight: bold">'.$key["has_microwave"].'</span>
-          <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
-          Has Patio?: <span style="color: #000; font-weight: bold">'.$key["has_patio"].'</span></span>
-        </div><BR>
-
-        <div class="row text-center" id="apt-direction-internet"> 
-          <span style="font-size: 17px">Has Dishwasher: <span style="color: #000; font-weight: bold">'.$key["has_dishwasher"].'</span>
-          <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
-          Has Washer/Dryer?: <span style="color: #000; font-weight: bold">'.$key["has_washdry"].'</span></span>
-        </div>';
-
-      // End apartment container
+      // End search results container
       $html .= '</div>';
-
-      $html .= (! $switch) ? '</div>' : '';
-
-      // Handles flipping between sides
-      $switch = ($switch) ? 0 : 1;
+    } else {
+      $html = '<div class="col-md-12 text-center" style="padding-bottom: 20px">No Apartments Found</div>';
     }
 
-    // End search results container
-    $html .= '</div>';
+    $html .= '
+      <div class="modal fade" id="sqlModal" tabindex="-1" role="dialog" aria-labelledby="sql-query-code" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel" style="color: #34495e">SQL Search Query</h4>
+            </div>
+            <div class="modal-body" style="color: #34495e">
+              '.$this->squery.'
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>';
 
     // Send our html to the client
     echo $html;
@@ -281,7 +332,7 @@ class model extends sqldb {
   public function buildSingleHTML($data) {
 
     // Search results container
-    $html = '';
+    $html = '<button class="btn btn-primary btn-sm" data-toggle="modal" style="position: absolute; right: 0; top: -70px" data-target="#sqlModal">SQL Code</button>';
 
     // Counter for box switching
     $switch = 1;
@@ -334,6 +385,24 @@ class model extends sqldb {
           Has Washer/Dryer?: <span style="color: #3498db; font-weight: bold">'.$key["has_washdry"].'</span></span>
         </div>';
     }
+
+    $html .= '
+      <div class="modal fade" id="sqlModal" tabindex="-1" role="dialog" aria-labelledby="sql-query-code" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel" style="color: #34495e">SQL Insert Query</h4>
+            </div>
+            <div class="modal-body" style="color: #34495e">
+              '.$this->cquery.'
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>';
 
     // Send our html to the client
     echo $html;

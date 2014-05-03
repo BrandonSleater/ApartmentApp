@@ -10,6 +10,10 @@ body {
     color: #ecf0f1;
 }
 
+div.tooltip-inner {
+    max-width: 350px;
+}
+
 .apt-form {
     background: url(../images/contbg.png) repeat center center fixed;
     height: 500px;
@@ -128,4 +132,8 @@ body {
 .ab-desc {
     font-weight: 300;
     font-style: italic;
+}
+
+.apt-cont {
+    color: #7f8c8d;
 }
