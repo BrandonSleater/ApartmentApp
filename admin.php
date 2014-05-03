@@ -18,8 +18,10 @@
 				<hr class="hr-style1">
 			</div>
 			<div class="row">
-				<form class="form-horizontal col-md-5 col-md-offset-3"  role="form" name="create-form" id="create-form" action="php/test2.php" method="POST">
-					<!-- Select Basic -->
+				<form class="form-horizontal col-md-5 col-md-offset-3" style="padding-left: 60px" role="form" name="create-form" id="create-form" action="php/post.php" method="POST">
+					
+					<input type="hidden" name="page" id="page" value="admin" />
+
 					<div class="form-group frm-inp-sm" style="margin-top: 5px">
 					  	<label class="col-md-6 control-label" for="floorplan">Floor Plan:</label>
 					  	<div class="col-md-4">

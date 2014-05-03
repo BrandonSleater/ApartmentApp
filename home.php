@@ -13,8 +13,10 @@
 				<h2>Search for Apartments</h2>
 				<hr class="hr-style1">
 			</div>
-			<form class="form-horizontal col-md-5" style="" role="form" name="apt-search" id="apt-search" action="php/test.php" method="POST">
-				<!-- Select Basic -->
+			<form class="form-horizontal col-md-5" style="" role="form" name="apt-search" id="apt-search" action="php/post.php" method="POST">
+
+				<input type="hidden" name="page" id="page" value="home" />
+
 				<div class="form-group frm-inp-tight" style="margin-top: 0">
 				  	<label class="col-md-6 control-label" for="floorplan">Floor Plan:</label>
 				  	<div class="col-md-4">
@@ -97,7 +99,7 @@
 			</form>
 
 			<div class="col-md-6 pull-right">
-				<div class="flexslider">
+				<div class="flexslider" style="box-shadow: 0 0 20px #000">
 				  	<ul class="slides">
 				    	<li>
 				    		<img src="images/1bed.png" />
