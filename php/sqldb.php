@@ -79,7 +79,7 @@ class sqldb {
 
     $query = $this->conn->query($sql);
 
-    if (!$query) {
+    if (! $query) {
       printf("Error Message: %s\n", $this->conn->error);
     }
 

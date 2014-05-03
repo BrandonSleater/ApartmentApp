@@ -36,7 +36,7 @@ class view extends model {
    */
   public function buildMultiResultHTMLContainer($data) {
 
-    if (!empty($data)) {
+    if (! empty($data)) {
       // Search results container
       $html = '<div class="col-sm-12">';
 
@@ -76,7 +76,7 @@ class view extends model {
         // Each row of data
         $html .= '
           <div class="row text-center" id="apt-image">
-            <img src="images/'.$img.'.png" alt="apartment image" class="img-rounded" width="95%" height="180px" style="box-shadow: 0 0 6px #000">
+            <img src="static/images/'.$img.'.png" alt="apartment image" class="img-rounded" width="95%" height="180px" style="box-shadow: 0 0 6px #000">
           </div>
 
           <div class="row text-center" id="apt-floorplan"> 
@@ -122,11 +122,14 @@ class view extends model {
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              
               <h4 class="modal-title" id="myModalLabel" style="color: #34495e">SQL Search Query</h4>
             </div>
+            
             <div class="modal-body" style="color: #34495e">
               '.$this->squery.'
             </div>
+            
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
@@ -170,7 +173,7 @@ class view extends model {
       // Each row of data
       $html .= '
         <div class="row text-center" id="apt-image">
-          <img src="images/'.$img.'.png" alt="apartment image" class="img-rounded" width="95%" height="180px" style="box-shadow: 0 0 6px #000">
+          <img src="static/images/'.$img.'.png" alt="apartment image" class="img-rounded" width="95%" height="180px" style="box-shadow: 0 0 6px #000">
         </div>
 
         <div class="row text-center" id="apt-floorplan"> 
@@ -202,11 +205,14 @@ class view extends model {
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              
               <h4 class="modal-title" id="myModalLabel" style="color: #34495e">SQL Insert Query</h4>
             </div>
+            
             <div class="modal-body" style="color: #34495e">
               '.$this->cquery.'
             </div>
+            
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
