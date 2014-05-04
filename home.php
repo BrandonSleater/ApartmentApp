@@ -1,4 +1,3 @@
-<?php include 'php/model.php'; ?>
 <!DOCTYPE html>
 <html>
 	<?php include 'php/head.php'; ?>
