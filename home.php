@@ -37,7 +37,7 @@
 				<div class="form-group frm-inp-tight">
 				  	<label class="col-md-6 control-label" for="window">Window:</label>
 				  	
-				  	<div class="col-md-3">
+				  	<div class="col-md-4">
 					    <select id="window" name="window" class="form-control input-large">
 					    	<option value="1">North</option>
 					      	<option value="2">East</option>

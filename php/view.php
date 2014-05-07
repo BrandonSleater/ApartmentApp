@@ -20,8 +20,10 @@ class view extends model {
     // Specifically make sure its a create (single), else we just search (multi)
     if ($this->data['type'] == 'single') {
       $this->buildSingleResultHTMLContainer($this->data['results']);
-    } else {
+    } elseif ($this->data['type'] == 'multi') {
       $this->buildMultiResultHTMLContainer($this->data['results']);
+    } else {
+      $this->buildPayResultHTMLContainer($this->data['results']);
     }
   }
 
@@ -98,14 +100,37 @@ class view extends model {
     // Search results container
     $html = '<button class="btn btn-primary btn-sm" data-toggle="modal" style="position: absolute; right: 0; top: -70px" data-target="#sqlModal">SQL Code</button>';
 
-    // Counter for box switching
-    $switch = 1;
-
     // Go through each row of data we received
     foreach($data as $value => $key) {
 
       // Build our container that holds the apartment information display
       $html .= $this->generateResultContainer($key);
+    }
+
+    // This holds and displays the specific query used to gather the results
+    $html .= $this->generateModal($this->cquery, 'Insert');
+
+    // Send our html to the client
+    echo $html;
+  }
+
+
+  /**
+   * A one column layout for 
+   * displaying our new apartment.
+   * 
+   * @param  [array] $data [information on the newly created aparment]
+   */
+  public function buildPayResultHTMLContainer($data) {
+
+    // Search results container
+    $html = '<button class="btn btn-primary btn-sm" data-toggle="modal" style="position: absolute; right: 0; top: -70px" data-target="#sqlModal">SQL Code</button>';
+
+    // Go through each row of data we received
+    foreach($data as $value => $key) {
+
+      // Build our container that holds the apartment information display
+      $html .= $this->generateResultContainer($key, 'pay');
     }
 
     // This holds and displays the specific query used to gather the results
@@ -160,53 +185,80 @@ class view extends model {
    * @param  [array] $data [cleaned values from the sql]
    * @return [string]      [html container display]
    */
-  public function generateResultContainer($data) {
+  public function generateResultContainer($data, $pay = FALSE) {
 
-    // Determine which photo we are using
-    switch ($data['floorplan']) {
-      case 'Studio':
-        $img = 'studio';
-        break;
+    if ($pay === FALSE) {
+      
+      // Determine which photo we are using
+      switch ($data['floorplan']) {
+        case 'Studio':
+          $img = 'studio';
+          break;
 
-      case '1 Bedroom':
-        $img = '1bed';
-        break;
+        case '1 Bedroom':
+          $img = '1bed';
+          break;
 
-      case '2 Bedroom':
-        $img = '2bed';
-        break;
+        case '2 Bedroom':
+          $img = '2bed';
+          break;
 
-      default:
-        break;
+        default:
+          break;
+      }
+
+      // Data on the new apartment
+      $html = '
+        <div class="row text-center" id="apt-image">
+          <img src="static/images/'.$img.'.png" alt="apartment image" class="img-rounded" width="95%" height="180px" style="box-shadow: 0 0 6px #000">
+        </div>
+
+        <div class="row text-center" id="apt-floorplan"> 
+          <h3>'.$data["floorplan"].' - '.$data["price"].'/month</h3><hr style="width: 70%; margin-top: 10px">
+        </div>
+
+        <div class="row text-center" style="margin-top: 0">
+          <div class="col-md-6">
+            <h4>'.$data['ll_name'].'</h4>
+          </div>
+          <div class="col-md-6">
+            <h4>'.$data['build_address'].'</h4>
+          </div>
+        </div><hr style="width: 70%">
+
+        <div class="row text-center" id="apt-direction-internet"> 
+          <span style="font-size: 17px">Direction Facing: <span style="color: #3498db; font-weight: bold">'.$data["build_name"].'</span>
+          <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
+          Has Internet?: <span style="color: #3498db; font-weight: bold">'.$data["has_internet"].'</span></span>
+        </div><BR>
+
+        <div class="row text-center" id="apt-direction-internet"> 
+          <span style="font-size: 17px">Has Microwave?: <span style="color: #3498db; font-weight: bold">'.$data["has_microwave"].'</span>
+          <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
+          Has Patio?: <span style="color: #3498db; font-weight: bold">'.$data["has_patio"].'</span></span>
+        </div><BR>
+
+        <div class="row text-center" id="apt-direction-internet"> 
+          <span style="font-size: 17px">Has Dishwasher: <span style="color: #3498db; font-weight: bold">'.$data["has_dishwasher"].'</span>
+          <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
+          Has Washer/Dryer?: <span style="color: #3498db; font-weight: bold">'.$data["has_washdry"].'</span></span>
+        </div>';
+    } else {
+      $html = '
+        <div class="row text-center">
+          Tenant Name: '.$data['tena_name'].'
+        </div>
+        <div class="row text-center">
+          Pay Amount: '.$data['pay_amount'].'
+        </div>
+        <div class="row text-center">
+          Process Date/Time: '.$data['pay_date'].'
+        </div>
+        <div class="row text-center">
+          Pay Type: '.ucfirst($data['pay_type']).'
+        </div>
+      ';
     }
-
-    // Data on the new apartment
-    $html = '
-      <div class="row text-center" id="apt-image">
-        <img src="static/images/'.$img.'.png" alt="apartment image" class="img-rounded" width="95%" height="180px" style="box-shadow: 0 0 6px #000">
-      </div>
-
-      <div class="row text-center" id="apt-floorplan"> 
-        <h3>'.$data["floorplan"].' - '.$data["price"].'/month</h3><hr style="width: 70%">
-      </div>
-
-      <div class="row text-center" id="apt-direction-internet"> 
-        <span style="font-size: 17px">Direction Facing: <span style="color: #3498db; font-weight: bold">'.$data["build_name"].'</span>
-        <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
-        Has Internet?: <span style="color: #3498db; font-weight: bold">'.$data["has_internet"].'</span></span>
-      </div><BR>
-
-      <div class="row text-center" id="apt-direction-internet"> 
-        <span style="font-size: 17px">Has Microwave?: <span style="color: #3498db; font-weight: bold">'.$data["has_microwave"].'</span>
-        <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
-        Has Patio?: <span style="color: #3498db; font-weight: bold">'.$data["has_patio"].'</span></span>
-      </div><BR>
-
-      <div class="row text-center" id="apt-direction-internet"> 
-        <span style="font-size: 17px">Has Dishwasher: <span style="color: #3498db; font-weight: bold">'.$data["has_dishwasher"].'</span>
-        <span style="border-left: 1px solid #999; margin: 0 20px 0 20px"></span>
-        Has Washer/Dryer?: <span style="color: #3498db; font-weight: bold">'.$data["has_washdry"].'</span></span>
-      </div>';
 
     // Send back to our layout
     return $html;

@@ -32,6 +32,10 @@ class model extends sqldb {
 
     // Determine if this is a search query or if we're making a new apartment    
     $func  = ($type == 'search') ? 'search' : 'create';
+
+    // Determine if we are paying a bill
+    $func  = ($type == 'pay') ? 'pay' : $func;
+
     $func .= 'Query';
 
     // On instantiation, run our search query then return the results
@@ -48,7 +52,7 @@ class model extends sqldb {
    * @param  [array] $post [data collected from the form]
    * @param  [int]   $id   [id of a new apartment]
    */
-  public function searchQuery($post = FALSE, $id = FALSE) {
+  public function searchQuery($post = FALSE, $id = FALSE, $payment = FALSE) {
 
     /**
      * Search Parameters:
@@ -91,49 +95,78 @@ class model extends sqldb {
     }
 
     // If we just created an apartment, we grab its data based off the new ID
-    $id = ($id !== FALSE) ? " AND a.apart_pk = $id" : "";
+    $payid = ($payment !== FALSE) ? "p.pay_pk = $id" : '';
+    $id    = ($id !== FALSE)      ? " AND a.apart_pk = $id" : '';
 
-    // SQL query (populated with a bunch of AND's)
-    $query = "
-      SELECT
-        b.build_name,
-        a.floorplan,
-        a.price,
-        a.has_internet,
-        a.has_microwave,
-        a.has_patio,
-        a.has_dishwasher,
-        a.has_washdry
-      FROM
-        apartment AS a
-      INNER JOIN
-        building AS b ON b.build_pk = a.build_fk
-      WHERE
-        a.status = 1
-      ".$id."
-      ".$floor."
-      ".$price."
-      ".$wind."
-      ".$intr."
-      ".$micro."
-      ".$patio."
-      ".$dish."
-      ".$wash."
-      ORDER BY
-        a.price
-    ";
+    if ($payment === FALSE) {
+      // SQL query (populated with a bunch of AND's)
+      $query = "
+        SELECT
+          b.build_name,
+          b.build_address,
+          l.ll_name,
+          a.floorplan,
+          a.price,
+          a.has_internet,
+          a.has_microwave,
+          a.has_patio,
+          a.has_dishwasher,
+          a.has_washdry
+        FROM
+          apartment AS a
+        INNER JOIN
+          building AS b ON b.build_pk = a.build_fk
+        INNER JOIN
+          landlord as l ON l.ll_pk = b.build_landlord_fk
+        WHERE
+          a.status = 1
+        ".$id."
+        ".$floor."
+        ".$price."
+        ".$wind."
+        ".$intr."
+        ".$micro."
+        ".$patio."
+        ".$dish."
+        ".$wash."
+        ORDER BY
+          a.price
+      ";
+    } else {
+      $query = "
+        SELECT
+          t.tena_name,
+          p.pay_type,
+          p.pay_date,
+          p.pay_processed,
+          p.pay_amount
+        FROM
+          payment AS p
+        INNER JOIN
+          tenant AS t ON t.tena_pk = p.tena_fk
+        WHERE
+          ".$payid."
+      ";
+    }
 
     // Save this query so that we can view it from the browser
     $this->squery = $query;
     
     // Run the query. The values are received in the form of an associative array
     $result = $this->searchSQL($query);
+
+    if ($result == 0) {
+      echo "User not found";
+      exit;
+    }
     
     // Clean up our inputs for the html
-    $this->control->cleanSQLData($result);
+    $this->control->cleanSQLData($result, $payment);
 
     // Type of html container we will display
     $type = ($id == NULL) ? 'multi' : 'single';
+
+    $type = ($type == 'single' && $payment !== FALSE) ? 'pay' : $type;
 
     // Pass back the data to our view
     $this->data = array('results' => $this->control->data, 'type' => $type);
@@ -187,6 +220,63 @@ class model extends sqldb {
 
     // Lets get information on the new apartment we just created
     $this->searchQuery(FALSE, $id);
+  }
+
+
+  /**
+   * An administrator ability to add 
+   * a new apartment to the database
+   * 
+   * @param  [array] $post [data collected from the form]
+   */
+  public function payQuery($post) {
+    
+    // Lets clean up the data before we give it to our database
+    $this->control->cleanPOSTData($post, 'pay');
+
+    $first = "
+      SELECT
+        tena_pk
+      FROM  
+        tenant
+      WHERE
+        tena_name = '".$this->control->data['payname']." ".$this->control->data['lastname']."'
+    ";
+
+    $result = $this->searchSQL($first);
+
+    if (empty($result)) {
+      echo "No user found";
+      exit;
+    } else {
+
+      // SQL query
+      $query = '
+        INSERT INTO payment 
+        (
+          tena_fk,
+          pay_type,
+          pay_date,
+          pay_processed,
+          pay_amount
+        )
+        VALUES
+        ('.$result[0]['tena_pk'].',
+         "'.$this->control->data['paytype'].'",
+         now(),
+         1,
+         '.$this->control->data['amount'].')   
+      ';
+
+      // Save this query so that we can view it from the browser
+      $this->cquery = $query;
+      
+      // Run the query. The values are received in the form of an associative array
+      $id = $this->createSQL($query);
+
+      // Lets get information on the new apartment we just created
+      $this->searchQuery(FALSE, $id, 'pay');
+    }
   }
 }
 

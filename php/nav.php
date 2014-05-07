@@ -9,7 +9,7 @@
 	function nav($page = 0) {
 		
 		// Based off nav, we'll assign page indexes from left to right
-		$list = [['home', 0], ['admin', 0], ['about', 0]];
+		$list = [['home', 0], ['admin', 0], ['about', 0], ['pay', 0]];
 
 		// Assign a value to the second element of the active page index
 		$list[$page][1] = (! $page) ? 1 : $page;

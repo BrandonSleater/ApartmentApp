@@ -81,9 +81,6 @@ class sqldb {
     // Free the result
     $query->free();
 
-    // Close up the DB
-    $this->conn->close();
-
     // Send it back to caller
     return $data;
   }
